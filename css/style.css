@@ -6,8 +6,8 @@
 
 body {
   font-family: Arial, sans-serif;
-  color: white;
-  background-color: #021532;
+  color: #021532;
+  background-color: white;
   line-height: 1.6;
 }
 
@@ -138,8 +138,8 @@ section {
 
 .btn {
   display: inline-block;
-  background-color: #ffffff;
-  color: #6d6d6e;
+  background-color: #6d6d6e;
+  color: white;
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
@@ -287,9 +287,9 @@ section {
 }
 
 .contact {
-  background: linear-gradient(135deg, rgb(47, 46, 102), #0f172a);
+  background: white;
   border-radius: 20px;
-  color: white;
+  color: #021532;
 }
 
 
@@ -419,6 +419,7 @@ section {
 .store-btn:hover {
   transform: translateY(-3px);
   opacity: 0.9;
+  background-color: #d91f26;
 }
 
 .qr-card {
