@@ -412,10 +412,36 @@ section {
   color: white;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 992px) {
+
+  .navbar {
+    max-width: 100%;
+    padding: 15px 20px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 1rem;
+  }
+
+  .hero h2 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .download-content {
     grid-template-columns: 1fr;
-    text-align: center;
+    gap: 30px;
   }
 
   .download-text {
@@ -427,23 +453,152 @@ section {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 15px;
+@media (max-width:768px){
+
+  .header{
+    position: relative;
   }
 
-  .nav-links {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
+  .navbar{
+    height:auto;
+    padding:20px;
+    flex-direction:column;
+    gap:20px;
   }
 
-  .hero h2 {
-    font-size: 30px;
+  .brand{
+    flex-direction:column;
+    text-align:center;
   }
 
-  .cards {
-    grid-template-columns: 1fr;
+  .logo-img{
+    width:70px;
+    height:70px;
   }
+
+  .logo{
+    font-size:1.8rem;
+  }
+
+  .slogan{
+    font-size:.95rem;
+  }
+
+  .nav-links{
+    flex-direction:column;
+    gap:15px;
+    width:100%;
+  }
+
+  .nav-links li{
+    width:100%;
+  }
+
+  .nav-links a{
+    display:block;
+    padding:12px;
+    border-radius:8px;
+    background:#021532;
+    color:white;
+  }
+
+  .hero{
+    min-height:70vh;
+    padding:40px 20px;
+  }
+
+  .hero h2{
+    font-size:2rem;
+  }
+
+  .hero p{
+    font-size:1rem;
+  }
+
+  .section{
+    padding:50px 20px;
+  }
+
+  .section h2{
+    font-size:2rem;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .card{
+    min-height:250px;
+  }
+
+  .card h3{
+    min-height:60px;
+    font-size:1.3rem;
+  }
+
+  .download-content{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .download-text{
+    text-align:center;
+  }
+
+  .store-buttons{
+    justify-content:center;
+  }
+
+  .qr-card img{
+    width:150px;
+    height:150px;
+  }
+
+  .footer-links{
+    flex-direction:column;
+    gap:10px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .logo{
+    font-size:1.5rem;
+  }
+
+  .slogan{
+    font-size:.85rem;
+  }
+
+  .hero h2{
+    font-size:1.7rem;
+  }
+
+  .hero p{
+    font-size:.95rem;
+  }
+
+  .btn{
+    width:100%;
+    text-align:center;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .card h3{
+    font-size:1.15rem;
+  }
+
+  .card p{
+    font-size:.95rem;
+  }
+
+  .store-btn{
+    width:100%;
+  }
+
 }
