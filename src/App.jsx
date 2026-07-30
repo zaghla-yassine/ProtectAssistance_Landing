@@ -95,27 +95,27 @@ const features = [
 
 const workflow = [
   {
-    icon: "bi-exclamation-circle-fill",
-    badge: "SOS",
-    title: "Je déclenche l’alerte",
+    icon: "bi-hand-index-thumb-fill",
+    badge: "En un geste",
+    title: "Je l’active en un instant",
     description:
-      "Un geste simple active un signal de secours avec toutes les informations essentielles.",
+      "Un simple appui suffit pour envoyer un signal de secours, sans chercher longtemps ni paniquer.",
     accent: "accent-red",
   },
   {
-    icon: "bi-shield-check",
-    badge: "Système",
-    title: "Le système sécurise et analyse",
+    icon: "bi-shield-fill-check",
+    badge: "Avec calme",
+    title: "Le système se met en mouvement",
     description:
-      "La plateforme traite l’alerte, localise la situation et prépare les preuves utiles.",
+      "La plateforme rassemble position, contacts et contexte pour aider immédiatement, sans complication.",
     accent: "accent-blue",
   },
   {
     icon: "bi-people-fill",
-    badge: "Contacts",
+    badge: "Avec vous",
     title: "Les proches sont prévenus",
     description:
-      "Les personnes à contacter reçoivent une notification claire et une vue d’ensemble rapide.",
+      "Les personnes concernées reçoivent une aide claire et rassurante, au bon moment.",
     accent: "accent-gold",
   },
 ];
@@ -473,70 +473,67 @@ function HomePage() {
         <section className="section workflow-section">
           <div className="container">
             <div ref={workflowRef} className="workflow-shell">
-              <div className="row g-4 align-items-stretch">
-                <div className="col-12 col-lg-7">
-                  <div className="workflow-copy">
+              <div className="workflow-grid">
+                <div className="workflow-story-card">
+                  <div className="workflow-intro-copy">
                     <p className="eyebrow">Comment ça marche</p>
                     <h2 className="workflow-title">
-                      Une expérience simple, pensée pour agir vite
+                      Une protection simple, humaine et prête à agir
                     </h2>
                     <p className="workflow-description">
-                      Trois étapes simples pour passer d’un besoin urgent à une
-                      réponse claire.
+                      Quand l’urgence se présente, l’expérience se simplifie
+                      pour guider chaque étape avec calme, clarté et présence.
                     </p>
+                  </div>
 
-                    <div className="workflow-timeline compact-timeline">
-                      {workflow.map((step, index) => (
-                        <article
-                          className={`workflow-step-card ${index === 1 ? "is-active" : ""}`}
-                          key={step.title}
-                        >
-                          <div className="workflow-step-marker">
-                            <div
-                              className={`workflow-icon-wrap ${step.accent}`}
-                            >
-                              <i className={`bi ${step.icon}`} />
-                            </div>
-                            <span className="workflow-step-badge">
-                              {step.badge}
-                            </span>
+                  <div className="workflow-timeline compact-timeline">
+                    {workflow.map((step, index) => (
+                      <article
+                        className={`workflow-step-card ${index === 1 ? "is-active" : ""}`}
+                        key={step.title}
+                      >
+                        <div className="workflow-step-marker">
+                          <div className={`workflow-icon-wrap ${step.accent}`}>
+                            <i className={`bi ${step.icon}`} />
                           </div>
-                          <div className="workflow-step-content">
-                            <h3>{step.title}</h3>
-                            <p>{step.description}</p>
-                          </div>
-                        </article>
-                      ))}
-                    </div>
+                          <span className="workflow-step-badge">
+                            {step.badge}
+                          </span>
+                        </div>
+                        <div className="workflow-step-content">
+                          <h3>{step.title}</h3>
+                          <p>{step.description}</p>
+                        </div>
+                      </article>
+                    ))}
                   </div>
                 </div>
 
-                <div className="col-12 col-lg-5">
-                  <div className="workflow-visual-card">
-                    <div className="workflow-orb orb-one" />
-                    <div className="workflow-orb orb-two" />
-                    <div className="workflow-visual-pill">
-                      <i className="bi bi-shield-fill-check" />
-                      <span>Protection en 3 temps</span>
-                    </div>
-                    <div className="workflow-visual-grid">
-                      <div className="workflow-mini-card">
-                        <i className="bi bi-exclamation-circle-fill" />
-                        <strong>SOS</strong>
-                      </div>
-                      <div className="workflow-mini-card">
-                        <i className="bi bi-geo-alt-fill" />
-                        <strong>Position</strong>
-                      </div>
-                      <div className="workflow-mini-card">
-                        <i className="bi bi-people-fill" />
-                        <strong>Contacts</strong>
-                      </div>
-                    </div>
-                    <p className="workflow-visual-caption">
-                      Une réponse claire, rapide et rassurante à chaque étape.
-                    </p>
+                <div className="workflow-visual-card">
+                  <div className="workflow-orb orb-one" />
+                  <div className="workflow-orb orb-two" />
+                  <div className="workflow-visual-pill">
+                    <i className="bi bi-heart-fill" />
+                    <span>Un accompagnement rassurant</span>
                   </div>
+                  <div className="workflow-support-stack">
+                    <div className="support-bubble">
+                      <strong>1</strong>
+                      <span>Je clique</span>
+                    </div>
+                    <div className="support-bubble">
+                      <strong>2</strong>
+                      <span>Le système agit</span>
+                    </div>
+                    <div className="support-bubble">
+                      <strong>3</strong>
+                      <span>Les proches sont prévenus</span>
+                    </div>
+                  </div>
+                  <p className="workflow-visual-caption">
+                    Pas de jargon, juste une aide simple, rapide et à portée de
+                    main.
+                  </p>
                 </div>
               </div>
             </div>
