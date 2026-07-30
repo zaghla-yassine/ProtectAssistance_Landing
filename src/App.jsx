@@ -18,14 +18,20 @@ const reasons = [
   {
     title: "Personnes âgées vivant seules",
     text: "Un accompagnement discret et fiable pour réagir dès qu’une situation devient dangereuse.",
+    icon: "🛡️",
+    tag: "Sécurité discrète",
   },
   {
     title: "Maladies neurodégénératives",
     text: "Des alertes intelligentes pour aider à sécuriser les personnes exposées au risque de disparition ou de chute.",
+    icon: "🧭",
+    tag: "Accompagnement",
   },
   {
     title: "Sécurité personnelle",
     text: "Une protection pensée pour les situations d’urgence, du simple incident à l’urgence critique.",
+    icon: "⚡",
+    tag: "Réactivité",
   },
 ];
 
@@ -89,20 +95,28 @@ const features = [
 
 const workflow = [
   {
-    title: "1. L’utilisateur déclenche un SOS",
-    text: "Un geste simple active une alerte sécurisée depuis l’application mobile.",
+    icon: "bi-exclamation-circle-fill",
+    badge: "SOS",
+    title: "Je déclenche l’alerte",
+    description:
+      "Un geste simple active un signal de secours avec toutes les informations essentielles.",
+    accent: "accent-red",
   },
   {
-    title: "2. Le backend traite l’alerte",
-    text: "Le service crée un incident, enregistre la position et prépare les données d’évidence.",
+    icon: "bi-shield-check",
+    badge: "Système",
+    title: "Le système sécurise et analyse",
+    description:
+      "La plateforme traite l’alerte, localise la situation et prépare les preuves utiles.",
+    accent: "accent-blue",
   },
   {
-    title: "3. Les proches reçoivent une notification",
-    text: "Les contacts prioritaires sont prévenus en temps réel via push notifications.",
-  },
-  {
-    title: "4. L’incident peut être confirmé ou résolu",
-    text: "La famille peut consulter l’alerte et prendre une décision rapide avec les informations disponibles.",
+    icon: "bi-people-fill",
+    badge: "Contacts",
+    title: "Les proches sont prévenus",
+    description:
+      "Les personnes à contacter reçoivent une notification claire et une vue d’ensemble rapide.",
+    accent: "accent-gold",
   },
 ];
 
@@ -195,6 +209,7 @@ function SectionTitle({ eyebrow, title, text }) {
 function HomePage() {
   const [openFaq, setOpenFaq] = useState(0);
   const securityRef = useRef(null);
+  const workflowRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -216,10 +231,50 @@ function HomePage() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.25,
+      },
+    );
+
+    if (workflowRef.current) {
+      observer.observe(workflowRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const openMailClient = (event) => {
+    if (event) {
+      event.preventDefault();
+    }
+
+    const mailtoLink =
+      "mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance";
+
+    try {
+      const link = document.createElement("a");
+      link.href = mailtoLink;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch {
+      window.location.href = mailtoLink;
     }
   };
 
@@ -327,42 +382,68 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="pourquoi" className="section container">
-          <SectionTitle
-            eyebrow="Pourquoi Protect Assistance"
-            title="Une réponse moderne à l’urgence réelle"
-            text="Le produit a été pensé pour les personnes qui ont besoin d’un soutien instantané, sans complication et sans délai."
-          />
-          <div className="reason-grid">
-            {reasons.map((reason) => (
-              <article className="reason-card" key={reason.title}>
-                <h3>{reason.title}</h3>
-                <p>{reason.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-        <section className="section container">
-          <div className="about-card">
-            <div>
-              <SectionTitle
-                eyebrow="À propos"
-                title="Notre mission : améliorer la sécurité personnelle grâce à la technologie"
-                text="Protect Assistance veut offrir une protection discrète, fiable et rapide à ceux qui ont besoin d’un soutien en cas d’urgence."
-              />
-            </div>
-            <div className="about-stats">
-              <div>
-                <strong>24/7</strong>
-                <span>réactivité</span>
+        <section id="pourquoi" className="section">
+          <div className="container">
+            <div className="premium-story-shell">
+              <div className="story-panel">
+                <SectionTitle
+                  eyebrow="Pourquoi Protect Assistance"
+                  title="Une réponse moderne à l’urgence réelle"
+                  text="Le produit a été pensé pour les personnes qui ont besoin d’un soutien instantané, sans complication et sans délai."
+                />
+                <div className="reason-grid premium-reasons">
+                  {reasons.map((reason) => (
+                    <article className="reason-card" key={reason.title}>
+                      <div className="reason-icon" aria-hidden="true">
+                        {reason.icon}
+                      </div>
+                      <div>
+                        <span className="reason-tag">{reason.tag}</span>
+                        <h3>{reason.title}</h3>
+                        <p>{reason.text}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
-              <div>
-                <strong>100%</strong>
-                <span>sécurisé</span>
-              </div>
-              <div>
-                <strong>1</strong>
-                <span>application</span>
+
+              <div className="story-panel about-panel">
+                <div className="about-card premium-about">
+                  <div>
+                    <SectionTitle
+                      eyebrow="À propos"
+                      title="Notre mission : sécuriser sans surcharger"
+                      text="Protect Assistance veut offrir une protection discrète, fiable et rapide à ceux qui ont besoin d’un soutien en cas d’urgence."
+                    />
+                    <p className="about-intro">
+                      Chaque interaction a été pensée pour réduire la friction,
+                      donner confiance et permettre une réaction rapide dans les
+                      moments critiques.
+                    </p>
+                    <div className="about-pill-list">
+                      <span>Réactivité immédiate</span>
+                      <span>Protection discrète</span>
+                      <span>Confiance renforcée</span>
+                    </div>
+                  </div>
+
+                  <div className="about-visual">
+                    <div className="about-stat-stack">
+                      <div className="about-stat-chip">
+                        <strong>24/7</strong>
+                        <span>réactivité</span>
+                      </div>
+                      <div className="about-stat-chip">
+                        <strong>100%</strong>
+                        <span>sécurisé</span>
+                      </div>
+                      <div className="about-stat-chip">
+                        <strong>1</strong>
+                        <span>application</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -389,34 +470,74 @@ function HomePage() {
           </div>
         </section>
 
-        <section className="section container">
-          <SectionTitle
-            eyebrow="Comment ça marche"
-            title="Un parcours simple, même en cas d’urgence"
-            text="Tout se passe en quelques gestes, avec une logique claire et rassurante."
-          />
-          <div className="workflow-flow">
-            <div className="workflow-step">
-              <div className="workflow-icon">1</div>
-              <div>
-                <h3>Je déclenche l’alerte</h3>
-                <p>Un geste simple envoie un signal de secours.</p>
-              </div>
-            </div>
-            <div className="workflow-arrow">→</div>
-            <div className="workflow-step">
-              <div className="workflow-icon">2</div>
-              <div>
-                <h3>Le système réagit</h3>
-                <p>La position et les informations utiles sont préparées.</p>
-              </div>
-            </div>
-            <div className="workflow-arrow">→</div>
-            <div className="workflow-step">
-              <div className="workflow-icon">3</div>
-              <div>
-                <h3>Les proches sont prévenus</h3>
-                <p>Les personnes à contacter reçoivent une alerte rapide.</p>
+        <section className="section workflow-section">
+          <div className="container">
+            <div ref={workflowRef} className="workflow-shell">
+              <div className="row g-4 align-items-stretch">
+                <div className="col-12 col-lg-7">
+                  <div className="workflow-copy">
+                    <p className="eyebrow">Comment ça marche</p>
+                    <h2 className="workflow-title">
+                      Une expérience simple, pensée pour agir vite
+                    </h2>
+                    <p className="workflow-description">
+                      Trois étapes simples pour passer d’un besoin urgent à une
+                      réponse claire.
+                    </p>
+
+                    <div className="workflow-timeline compact-timeline">
+                      {workflow.map((step, index) => (
+                        <article
+                          className={`workflow-step-card ${index === 1 ? "is-active" : ""}`}
+                          key={step.title}
+                        >
+                          <div className="workflow-step-marker">
+                            <div
+                              className={`workflow-icon-wrap ${step.accent}`}
+                            >
+                              <i className={`bi ${step.icon}`} />
+                            </div>
+                            <span className="workflow-step-badge">
+                              {step.badge}
+                            </span>
+                          </div>
+                          <div className="workflow-step-content">
+                            <h3>{step.title}</h3>
+                            <p>{step.description}</p>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-12 col-lg-5">
+                  <div className="workflow-visual-card">
+                    <div className="workflow-orb orb-one" />
+                    <div className="workflow-orb orb-two" />
+                    <div className="workflow-visual-pill">
+                      <i className="bi bi-shield-fill-check" />
+                      <span>Protection en 3 temps</span>
+                    </div>
+                    <div className="workflow-visual-grid">
+                      <div className="workflow-mini-card">
+                        <i className="bi bi-exclamation-circle-fill" />
+                        <strong>SOS</strong>
+                      </div>
+                      <div className="workflow-mini-card">
+                        <i className="bi bi-geo-alt-fill" />
+                        <strong>Position</strong>
+                      </div>
+                      <div className="workflow-mini-card">
+                        <i className="bi bi-people-fill" />
+                        <strong>Contacts</strong>
+                      </div>
+                    </div>
+                    <p className="workflow-visual-caption">
+                      Une réponse claire, rapide et rassurante à chaque étape.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -507,6 +628,7 @@ function HomePage() {
                 <a
                   href="mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance"
                   className="btn btn-primary"
+                  onClick={(event) => openMailClient(event)}
                 >
                   Télécharger l’application
                 </a>
@@ -616,13 +738,18 @@ function HomePage() {
                 accompagner dans votre projet de sécurité personnelle.
               </p>
             </div>
-            <a
-              href="mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance"
+            <button
+              type="button"
               className="btn"
-              style={{ background: "#d91f26", color: "white" }}
+              style={{
+                background: "#d91f26",
+                color: "white",
+                cursor: "pointer",
+              }}
+              onClick={(event) => openMailClient(event)}
             >
               Écrire à l’équipe
-            </a>
+            </button>
           </div>
 
           <div className="footer-content">

@@ -444,12 +444,66 @@ a {
   box-shadow: 0 12px 34px rgba(7, 19, 33, 0.05);
 }
 
+.reason-card {
+  position: relative;
+  display: flex;
+  gap: 0.95rem;
+  align-items: flex-start;
+  padding: 1.15rem 1.15rem 1.2rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(7, 19, 33, 0.08);
+  border-radius: 1.25rem;
+  box-shadow: 0 16px 38px rgba(7, 19, 33, 0.05);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.reason-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 40px rgba(7, 19, 33, 0.09);
+}
+
+.reason-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(180deg, var(--primary), #f59a9e);
+}
+
+.reason-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 1.15rem;
+  background: linear-gradient(135deg, #feeff0 0%, #ffe6e8 100%);
+  box-shadow: inset 0 1px 2px rgba(7, 19, 33, 0.06);
+  flex-shrink: 0;
+}
+
+.reason-tag {
+  display: inline-flex;
+  margin-bottom: 0.45rem;
+  padding: 0.29rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(217, 31, 38, 0.08);
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .reason-card h3,
 .workflow-card h3,
 .tech-card h3,
 .dashboard-card h3,
 .pricing-card h3 {
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.45rem;
   font-size: 1.05rem;
 }
 
@@ -463,6 +517,155 @@ a {
 .faq-item p {
   margin: 0;
   color: var(--text-muted);
+}
+
+.premium-story-shell {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.story-panel {
+  position: relative;
+  padding: 1.4rem;
+  border-radius: 1.8rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f7f9fc 100%);
+  border: 1px solid rgba(7, 19, 33, 0.06);
+  box-shadow: 0 24px 70px rgba(7, 19, 33, 0.06);
+  overflow: hidden;
+}
+
+.story-panel::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(217, 31, 38, 0.14) 0%,
+    rgba(217, 31, 38, 0) 70%
+  );
+  top: -90px;
+  right: -70px;
+  pointer-events: none;
+}
+
+.story-panel::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.16) 0%,
+    rgba(56, 189, 248, 0) 70%
+  );
+  bottom: -70px;
+  left: -60px;
+  pointer-events: none;
+}
+
+.premium-reasons {
+  grid-template-columns: 1fr;
+  gap: 0.95rem;
+}
+
+.about-card.premium-about {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.premium-about .section-heading {
+  text-align: left;
+  margin: 0 0 1rem;
+  max-width: none;
+}
+
+.about-intro {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.about-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.about-pill-list span {
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(217, 31, 38, 0.08);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.about-visual {
+  position: relative;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.about-stat-stack {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.about-stat-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f2f5f9 100%);
+  border: 1px solid rgba(7, 19, 33, 0.07);
+  box-shadow: 0 10px 24px rgba(7, 19, 33, 0.04);
+}
+
+.about-stat-chip strong {
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.about-stat-chip span {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.about-floating {
+  position: absolute;
+  right: -12px;
+  bottom: -8px;
+  max-width: 210px;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: rgba(7, 19, 33, 0.94);
+  color: white;
+  box-shadow: 0 16px 34px rgba(7, 19, 33, 0.16);
+}
+
+.about-floating p {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.about-floating strong {
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .feature-grid {
@@ -549,54 +752,276 @@ a {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.workflow-flow {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr;
-  align-items: center;
-  gap: 0.8rem;
-  max-width: 980px;
-  margin: 0 auto;
+.workflow-section {
+  position: relative;
+  overflow: hidden;
 }
 
-.workflow-step {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 1rem 1.1rem;
-  border-radius: 1.2rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 14px 32px rgba(7, 19, 33, 0.05);
-  min-height: 112px;
+.workflow-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(217, 31, 38, 0.08) 0%,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(56, 189, 248, 0.12) 0%,
+      transparent 30%
+    );
+  pointer-events: none;
 }
 
-.workflow-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #feeff0 0%, #ffd9db 100%);
-  color: var(--primary);
-  font-weight: 800;
-  flex-shrink: 0;
+.workflow-shell {
+  position: relative;
+  padding: 2rem;
+  border-radius: 2rem;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(248, 250, 252, 0.95) 100%
+  );
+  border: 1px solid rgba(7, 19, 33, 0.06);
+  box-shadow: 0 28px 80px rgba(7, 19, 33, 0.06);
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
-.workflow-step h3 {
-  margin: 0 0 0.3rem;
+.workflow-shell.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.workflow-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-title {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.7rem, 3.2vw, 2.45rem);
+  line-height: 1.14;
+  color: var(--text);
+}
+
+.workflow-description {
+  margin: 0 0 1.4rem;
+  max-width: 620px;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
-.workflow-step p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.workflow-timeline {
+  position: relative;
+  display: grid;
+  gap: 0.7rem;
+  padding-left: 1rem;
 }
 
-.workflow-arrow {
+.compact-timeline {
+  gap: 0.7rem;
+}
+
+.workflow-timeline::before {
+  content: "";
+  position: absolute;
+  left: 1.1rem;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(217, 31, 38, 0.4) 0%,
+    rgba(7, 19, 33, 0.1) 100%
+  );
+}
+
+.workflow-step-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.15rem;
+  border-radius: 1.3rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(7, 19, 33, 0.06);
+  box-shadow: 0 16px 34px rgba(7, 19, 33, 0.05);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.workflow-step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(7, 19, 33, 0.07);
+  border-color: rgba(217, 31, 38, 0.15);
+}
+
+.workflow-step-card.is-active {
+  border-color: rgba(217, 31, 38, 0.2);
+  box-shadow: 0 18px 38px rgba(217, 31, 38, 0.09);
+}
+
+.workflow-step-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.workflow-icon-wrap {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 0 10px 20px rgba(7, 19, 33, 0.12);
+}
+
+.workflow-icon-wrap.accent-red {
+  background: linear-gradient(135deg, var(--primary), #ff7a80);
+}
+
+.workflow-icon-wrap.accent-blue {
+  background: linear-gradient(135deg, #0f2d47, #3e6ea8);
+}
+
+.workflow-icon-wrap.accent-gold {
+  background: linear-gradient(135deg, #a4650d, #d7a53d);
+}
+
+.workflow-step-badge {
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(7, 19, 33, 0.06);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.workflow-step-content h3 {
+  margin: 0 0 0.2rem;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+.workflow-step-content p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.workflow-visual-card {
+  position: relative;
+  height: 100%;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 1.4rem;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(247, 250, 252, 0.94)
+  );
+  border: 1px solid rgba(7, 19, 33, 0.06);
+  box-shadow: 0 16px 36px rgba(7, 19, 33, 0.05);
+  overflow: hidden;
+}
+
+.workflow-visual-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(217, 31, 38, 0.08);
   color: var(--primary);
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.workflow-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.workflow-mini-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 92px;
+  border-radius: 1rem;
+  background: white;
+  border: 1px solid rgba(7, 19, 33, 0.05);
+  box-shadow: 0 10px 20px rgba(7, 19, 33, 0.04);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.workflow-mini-card i {
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+.workflow-visual-caption {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  align-self: center;
+}
+
+.workflow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(16px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.orb-one {
+  width: 140px;
+  height: 140px;
+  background: rgba(217, 31, 38, 0.16);
+  top: 10px;
+  right: 10px;
+}
+
+.orb-two {
+  width: 180px;
+  height: 180px;
+  background: rgba(56, 189, 248, 0.16);
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes workflowFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .security-revamp {
@@ -944,6 +1369,8 @@ a {
   padding: 1.5rem 0 2rem;
   background: linear-gradient(180deg, #071321 0%, #10253d 100%);
   color: white;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
 }
 
 .footer-shell {
