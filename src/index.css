@@ -1516,20 +1516,16 @@ a {
 
 @media (max-width: 980px) {
   .hero-shell,
+  .premium-story-shell,
+  .about-card.premium-about,
   .security-revamp,
   .api-card,
-  .split-grid,
-  .about-card {
+  .split-grid {
     grid-template-columns: 1fr;
   }
 
-  .workflow-flow {
+  .workflow-grid {
     grid-template-columns: 1fr;
-    gap: 0.9rem;
-  }
-
-  .workflow-arrow {
-    display: none;
   }
 
   .feature-grid,
@@ -1539,22 +1535,112 @@ a {
   .reason-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .workflow-visual-card {
+    min-height: auto;
+  }
 }
 
 @media (max-width: 760px) {
-  .navbar,
-  .footer-content,
-  .footer-contact-card {
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    min-height: auto;
+    padding: 0.95rem 0;
+    gap: 0.85rem;
     flex-direction: column;
     align-items: flex-start;
   }
 
+  .brand {
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .brand h1 {
+    font-size: 1rem;
+  }
+
+  .brand p {
+    font-size: 0.82rem;
+  }
+
+  .logo-img {
+    width: 48px;
+    height: 48px;
+  }
+
   .nav-links {
     flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .nav-links button {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .hero {
+    padding: 4.2rem 0 3.4rem;
+  }
+
+  .hero-shell {
+    gap: 1.7rem;
+  }
+
+  .hero-copy h2 {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  .hero-description {
+    font-size: 0.98rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-highlights {
+    gap: 0.55rem;
+  }
+
+  .hero-highlights span {
+    font-size: 0.84rem;
+  }
+
+  .phone-frame {
+    width: min(320px, 100%);
+  }
+
+  .phone-screen {
+    min-height: 360px;
   }
 
   .section {
     padding: 4rem 0;
+  }
+
+  .section-heading {
+    margin-bottom: 1.8rem;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+  }
+
+  .story-panel {
+    padding: 1.2rem;
+  }
+
+  .premium-about .section-heading {
+    text-align: center;
+  }
+
+  .about-pill-list {
+    justify-content: center;
   }
 
   .feature-grid,
@@ -1565,13 +1651,85 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
+  .feature-card {
+    height: 300px;
   }
 
-  .security-metrics {
+  .workflow-shell {
+    padding: 1.15rem;
+  }
+
+  .workflow-step-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .workflow-step-marker {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .workflow-step-content h3 {
+    font-size: 0.96rem;
+  }
+
+  .workflow-visual-card {
+    padding: 1rem;
+    min-height: auto;
+  }
+
+  .security-metrics,
+  .security-stack {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .security-hero-card {
+    padding: 1.35rem;
+    gap: 1.35rem;
+  }
+
+  .split-grid {
+    gap: 1.4rem;
+  }
+
+  .download-qr-card {
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  .qr-placeholder {
+    width: 100%;
+    max-width: 220px;
+    height: 220px;
+  }
+
+  .faq-item button {
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .faq-icon {
+    margin-top: 0.12rem;
+  }
+
+  .footer-content,
+  .footer-contact-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-contact-card {
+    padding: 1.2rem;
+    gap: 1rem;
+  }
+
+  .footer-content {
+    gap: 0.8rem;
+  }
+
+  .footer-links {
+    gap: 0.6rem;
   }
 
   .btn {
@@ -1582,5 +1740,35 @@ a {
   .about-card,
   .contact-card {
     padding: 1.35rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: min(100% - 1.25rem, 1180px);
+  }
+
+  .hero {
+    padding: 3.6rem 0 3rem;
+  }
+
+  .hero-badge {
+    font-size: 0.76rem;
+  }
+
+  .hero-copy h2 {
+    font-size: 1.8rem;
+  }
+
+  .workflow-shell {
+    border-radius: 1.25rem;
+  }
+
+  .workflow-step-card {
+    padding: 0.95rem;
+  }
+
+  .support-bubble {
+    padding: 0.8rem 0.9rem;
   }
 }
