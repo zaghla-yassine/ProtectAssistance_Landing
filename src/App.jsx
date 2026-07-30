@@ -1,6 +1,6 @@
-import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import logo from "../image/logoProtectAssistance.jpg";
-import heroBg from "../image/imageaccueil.jpg";
 import enlevementImg from "../image/enlevement.jpg";
 import agressionImg from "../image/agression.jpg";
 import secretImg from "../image/secret.jpg";
@@ -14,69 +14,113 @@ import chuteImg from "../image/chute.png";
 import alzheimerImg from "../image/alzheimer.jpg";
 import qrCodeImg from "../image/qr-code.jpg";
 
+const reasons = [
+  {
+    title: "Personnes âgées vivant seules",
+    text: "Un accompagnement discret et fiable pour réagir dès qu’une situation devient dangereuse.",
+  },
+  {
+    title: "Maladies neurodégénératives",
+    text: "Des alertes intelligentes pour aider à sécuriser les personnes exposées au risque de disparition ou de chute.",
+  },
+  {
+    title: "Sécurité personnelle",
+    text: "Une protection pensée pour les situations d’urgence, du simple incident à l’urgence critique.",
+  },
+];
+
 const features = [
   {
-    title: "Alerte enlèvement",
-    text: "Déclenchez rapidement une alerte en cas d’enlèvement et prévenez automatiquement vos contacts.",
+    title: "Authentification sécurisée",
+    text: "JWT, comptes personnels et comptes familiaux pour un accès garanti et maîtrisé.",
     image: enlevementImg,
   },
   {
-    title: "Détection d’agression",
-    text: "À partir de 3 secousses brusques, l’application détecte une situation d’urgence.",
+    title: "Profil protégé",
+    text: "Informations médicales, contacts d’urgence et données sensibles centralisées et protégées.",
     image: agressionImg,
   },
   {
-    title: "Phrase secrète",
-    text: "Définissez une phrase secrète pour activer une alerte discrète en cas de danger.",
+    title: "Contacts prioritaires",
+    text: "Gérez rapidement les personnes à prévenir en cas d’alerte ou de besoin immédiat.",
     image: secretImg,
   },
   {
-    title: "Mode panique",
-    text: "Un simple appui prolongé déclenche un message d’alerte au sein d’un workflow automatique.",
+    title: "Familles connectées",
+    text: "Liez plusieurs membres de la famille et partagez l’état de sécurité en temps réel.",
     image: paniqueImg,
   },
   {
-    title: "Jet du téléphone",
-    text: "Le téléphone peut être utilisé comme signal d’alerte en cas de menace immédiate.",
+    title: "Alertes SOS",
+    text: "Déclenchez une alerte robuste avec historique, position et preuves associées.",
     image: jetImg,
   },
   {
-    title: "Capture audio et vidéo",
-    text: "Enregistrez des preuves utiles pour sécuriser les interventions et les déclarations.",
+    title: "Preuves numériques",
+    text: "Audio, photo et vidéo pour documenter les faits et sécuriser les démarches.",
     image: captureImg,
   },
   {
-    title: "Alarme maison",
-    text: "Analyse intelligente des incidents domestiques à partir de sons ou d’événements détectés.",
+    title: "Zones de sécurité",
+    text: "Définissez un périmètre sécurisé et recevez une notification automatique si la zone est franchie.",
     image: alarmeImg,
   },
   {
-    title: "Accident de voiture",
-    text: "Détection automatique d’un arrêt brutal et envoi d’une alerte immédiate.",
-    image: voitureImg,
-  },
-  {
-    title: "GPS en temps réel",
-    text: "Partagez votre position géographique instantanément lors d’une alerte.",
+    title: "Localisation GPS",
+    text: "Suivi en direct et intégration Google Maps pour une visibilité immédiate de l’état de la personne.",
     image: gpsImg,
   },
   {
-    title: "Détection de chute",
-    text: "Recevez une alerte automatique en cas de chute ou d’incident physique.",
+    title: "Notifications instantanées",
+    text: "Push notifications via Firebase Cloud Messaging pour une diffusion instantanée.",
+    image: voitureImg,
+  },
+  {
+    title: "Prévention des chutes",
+    text: "Un système d’alerte autonome pour les incidents physiques et les situations de vulnérabilité.",
     image: chuteImg,
   },
   {
     title: "Protection Alzheimer",
-    text: "Définissez une zone de sécurité et recevez un signal si la personne en sort.",
+    text: "Des garde-fous pour accompagner les personnes à risque de se perdre ou d’être prises au dépourvu.",
     image: alzheimerImg,
   },
+];
+
+const workflow = [
+  {
+    title: "1. L’utilisateur déclenche un SOS",
+    text: "Un geste simple active une alerte sécurisée depuis l’application mobile.",
+  },
+  {
+    title: "2. Le backend traite l’alerte",
+    text: "Le service crée un incident, enregistre la position et prépare les données d’évidence.",
+  },
+  {
+    title: "3. Les proches reçoivent une notification",
+    text: "Les contacts prioritaires sont prévenus en temps réel via push notifications.",
+  },
+  {
+    title: "4. L’incident peut être confirmé ou résolu",
+    text: "La famille peut consulter l’alerte et prendre une décision rapide avec les informations disponibles.",
+  },
+];
+
+const securityPillars = [
+  "JWT authentication",
+  "APIs protégées",
+  "Permissions basées sur les rôles",
+  "Mots de passe hashés",
+  "Validation robuste",
+  "Infrastructure cloud sécurisée",
 ];
 
 const plans = [
   {
     name: "Essentiel",
     price: "19€ / mois",
-    description: "Pour une protection de base avec les alertes prioritaires.",
+    description:
+      "Pour une protection de base avec alertes prioritaires et suivi simple.",
     features: [
       "Alerte personnalisée",
       "Contacts de confiance",
@@ -92,7 +136,7 @@ const plans = [
     features: [
       "Tout du plan Essentiel",
       "Capture audio/vidéo",
-      "Détection avancée multi-situations",
+      "Détection avancée",
     ],
     featured: true,
   },
@@ -110,6 +154,34 @@ const plans = [
   },
 ];
 
+const faqItems = [
+  {
+    question: "Comment fonctionne un SOS ?",
+    answer:
+      "Un simple geste dans l’application déclenche une alerte sécurisée, enregistre la position et notifie immédiatement les contacts prioritaires.",
+  },
+  {
+    question: "Qui reçoit les notifications ?",
+    answer:
+      "Les proches désignés par l’utilisateur reçoivent des notifications push en temps réel ainsi qu’un accès à l’historique de l’alerte.",
+  },
+  {
+    question: "Est-ce que mes données sont sécurisées ?",
+    answer:
+      "Oui. Protect Assistance s’appuie sur l’authentification JWT, des APIs protégées, des mots de passe sécurisés et un stockage cloud contrôlé.",
+  },
+  {
+    question: "Peut-on ajouter plusieurs membres de la famille ?",
+    answer:
+      "Oui. La plateforme permet de lier plusieurs personnes et de gérer les permissions selon le rôle de chaque membre.",
+  },
+  {
+    question: "L’application fonctionne-t-elle hors ligne ?",
+    answer:
+      "La détection et l’envoi de certaines alertes restent possibles lorsque la connexion réseau est faible, avec synchronisation dès que la connexion revient.",
+  },
+];
+
 function SectionTitle({ eyebrow, title, text }) {
   return (
     <div className="section-heading">
@@ -121,17 +193,34 @@ function SectionTitle({ eyebrow, title, text }) {
 }
 
 function HomePage() {
+  const [openFaq, setOpenFaq] = useState(0);
+  const securityRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-security");
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.4,
+      },
+    );
+
+    if (securityRef.current) {
+      observer.observe(securityRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
-
-  const handleContactMail = (event) => {
-    event.preventDefault();
-    window.location.href =
-      "mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance";
   };
 
   return (
@@ -146,25 +235,19 @@ function HomePage() {
             />
             <div>
               <h1>Protect Assistance</h1>
-              <p>Votre ange gardien numérique</p>
+              <p>Sécurité personnelle intelligente</p>
             </div>
           </Link>
 
           <div className="nav-links">
+            <button type="button" onClick={() => scrollToSection("pourquoi")}>
+              Pourquoi
+            </button>
             <button
               type="button"
               onClick={() => scrollToSection("fonctionnalites")}
             >
               Fonctionnalités
-            </button>
-            <button type="button" onClick={() => scrollToSection("tarifs")}>
-              Tarifs
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollToSection("telechargement")}
-            >
-              Télécharger
             </button>
             <button type="button" onClick={() => scrollToSection("contact")}>
               Contact
@@ -174,68 +257,298 @@ function HomePage() {
       </header>
 
       <main>
-        <section
-          className="hero"
-          style={{
-            backgroundImage: `linear-gradient(120deg, rgba(2,21,50,.92), rgba(2,21,50,.70)), url(${heroBg})`,
-          }}
-        >
-          <div className="container hero-content">
-            <div className="hero-badge">
-              Protection intelligente • Réactivité immédiate
+        <section className="hero">
+          <div className="hero-glow glow-one" />
+          <div className="hero-glow glow-two" />
+          <div className="container hero-shell">
+            <div className="hero-copy">
+              <p className="hero-badge">
+                Protection intelligente • Réactivité immédiate
+              </p>
+              <h2>Votre proche est jamais seul, même loin de vous.</h2>
+              <p className="hero-description">
+                Protect Assistance réunit une application Android, une API
+                robuste et un système d’alertes instantané pour protéger les
+                personnes vulnérables au quotidien.
+              </p>
+              <div className="hero-actions">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => scrollToSection("telechargement")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Télécharger l’application
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => scrollToSection("fonctionnalites")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Découvrir le produit
+                </button>
+              </div>
+              <div className="hero-highlights">
+                <span>JWT sécurisé</span>
+                <span>GPS en temps réel</span>
+                <span>Push notifications</span>
+              </div>
             </div>
-            <h2>Transformez votre téléphone en dispositif d’alerte autonome</h2>
-            <p>
-              Une application de sécurité personnelle conçue pour détecter,
-              alerter et agir rapidement en cas d’urgence.
-            </p>
-            <div className="hero-actions">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => scrollToSection("fonctionnalites")}
-              >
-                Découvrir les fonctionnalités
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => scrollToSection("telechargement")}
-              >
-                Télécharger l’application
-              </button>
+
+            <div className="hero-visual" aria-hidden="true">
+              <div className="phone-frame">
+                <div className="phone-notch" />
+                <div className="phone-screen">
+                  <div className="screen-top">
+                    <span className="chip">SOS actif</span>
+                    <span className="signal-dot" />
+                  </div>
+                  <div className="screen-card main-card">
+                    <p>État de sécurité</p>
+                    <h3>Tout va bien</h3>
+                    <div className="mini-bars">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  </div>
+                  <div className="screen-card">
+                    <p>Dernière alerte</p>
+                    <strong>12:43 • Localisation partagée</strong>
+                  </div>
+                  <div className="screen-card compact">
+                    <p>Contacts</p>
+                    <strong>M. Dupont • Famille</strong>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="fonctionnalites" className="section container">
+        <section id="pourquoi" className="section container">
           <SectionTitle
-            eyebrow="Fonctionnalités"
-            title="Une protection complète, pensée pour l’urgence"
-            text="Des mécanismes de détection adaptés à plusieurs situations de risque, pour une réaction rapide et fiable."
+            eyebrow="Pourquoi Protect Assistance"
+            title="Une réponse moderne à l’urgence réelle"
+            text="Le produit a été pensé pour les personnes qui ont besoin d’un soutien instantané, sans complication et sans délai."
           />
-          <div className="feature-grid">
-            {features.map((feature) => (
-              <article
-                className="feature-card"
-                key={feature.title}
-                style={{
-                  backgroundImage: `linear-gradient(180deg, rgba(2,21,50,.72), rgba(2,21,50,.82)), url(${feature.image})`,
-                }}
-              >
-                <h3>{feature.title}</h3>
-                <p>{feature.text}</p>
+          <div className="reason-grid">
+            {reasons.map((reason) => (
+              <article className="reason-card" key={reason.title}>
+                <h3>{reason.title}</h3>
+                <p>{reason.text}</p>
               </article>
             ))}
           </div>
         </section>
+        <section className="section container">
+          <div className="about-card">
+            <div>
+              <SectionTitle
+                eyebrow="À propos"
+                title="Notre mission : améliorer la sécurité personnelle grâce à la technologie"
+                text="Protect Assistance veut offrir une protection discrète, fiable et rapide à ceux qui ont besoin d’un soutien en cas d’urgence."
+              />
+            </div>
+            <div className="about-stats">
+              <div>
+                <strong>24/7</strong>
+                <span>réactivité</span>
+              </div>
+              <div>
+                <strong>100%</strong>
+                <span>sécurisé</span>
+              </div>
+              <div>
+                <strong>1</strong>
+                <span>application</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <section id="tarifs" className="section pricing-section">
+        <section id="fonctionnalites" className="section section-surface">
+          <div className="container">
+            <SectionTitle
+              eyebrow="Fonctionnalités"
+              title="Un produit complet, conçu pour la confiance"
+              text="Chaque module a été conçu autour du besoin essentiel : réagir vite, protéger, documenter et rassurer."
+            />
+            <div className="feature-grid">
+              {features.map((feature) => (
+                <article className="feature-card" key={feature.title}>
+                  <img src={feature.image} alt="" />
+                  <div className="feature-overlay">
+                    <h3>{feature.title}</h3>
+                    <p>{feature.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section container">
+          <SectionTitle
+            eyebrow="Comment ça marche"
+            title="Un parcours simple, même en cas d’urgence"
+            text="Tout se passe en quelques gestes, avec une logique claire et rassurante."
+          />
+          <div className="workflow-flow">
+            <div className="workflow-step">
+              <div className="workflow-icon">1</div>
+              <div>
+                <h3>Je déclenche l’alerte</h3>
+                <p>Un geste simple envoie un signal de secours.</p>
+              </div>
+            </div>
+            <div className="workflow-arrow">→</div>
+            <div className="workflow-step">
+              <div className="workflow-icon">2</div>
+              <div>
+                <h3>Le système réagit</h3>
+                <p>La position et les informations utiles sont préparées.</p>
+              </div>
+            </div>
+            <div className="workflow-arrow">→</div>
+            <div className="workflow-step">
+              <div className="workflow-icon">3</div>
+              <div>
+                <h3>Les proches sont prévenus</h3>
+                <p>Les personnes à contacter reçoivent une alerte rapide.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-surface">
+          <SectionTitle
+            eyebrow="Sécurité"
+            title="Une protection robuste, pensée pour l’urgence"
+            text="Protect Assistance allie une architecture fiable, des mécanismes
+          d’authentification solides et une expérience sécurisée, pour
+          agir vite sans compromettre la confiance."
+          />
+
+          <div ref={securityRef} className="container security-revamp">
+            <div className="security-hero-card">
+              <div className="security-metrics">
+                <div>
+                  <strong className="security-number">24/7</strong>
+                  <span>Réactivité</span>
+                </div>
+
+                <div>
+                  <strong className="security-number">100%</strong>
+                  <span>Confiance</span>
+                </div>
+
+                <div>
+                  <strong className="security-number">0</strong>
+                  <span>Compromis</span>
+                </div>
+              </div>
+
+              <div className="security-stack">
+                {securityPillars.map((item, index) => (
+                  <div className="security-pill-card" key={item}>
+                    <span className="security-index">0{index + 1}</span>
+                    <p>{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="telechargement" className="section container">
+          <div className="split-grid">
+            <div>
+              <SectionTitle
+                eyebrow="Application mobile"
+                title="Une expérience mobile élégante et utile"
+                text="Le parcours utilisateur a été pensé pour rester simple, instinctif et rassurant dans les moments critiques."
+              />
+              <div className="feature-list">
+                <div>
+                  <strong>Utilisateur protégé</strong>
+                  <p>
+                    Profil, santé, contacts d’urgence et historique des alertes.
+                  </p>
+                </div>
+                <div>
+                  <strong>Membre de la famille</strong>
+                  <p>
+                    Visualisation des alertes et suivi de la position partagée.
+                  </p>
+                </div>
+                <div>
+                  <strong>Alertes en direct</strong>
+                  <p>
+                    GPS, notifications et zones de sécurité en une seule
+                    expérience.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="mockup-stage">
+              <div className="download-qr-card">
+                <div className="qr-placeholder" aria-label="Code QR décoratif">
+                  <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=placeholder"
+                    alt="QR Code"
+                    className="qr-code"
+                  />
+                </div>
+                <p className="qr-caption">
+                  Disponible prochainement sur Google Play
+                </p>
+                <a
+                  href="mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance"
+                  className="btn btn-primary"
+                >
+                  Télécharger l’application
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section-surface">
+          <div className="container">
+            <SectionTitle
+              eyebrow="Admin dashboard"
+              title="Un futur tableau de bord prêt pour l’observation"
+              text="L’interface d’administration permettra de superviser les utilisateurs, les alertes et les statistiques."
+            />
+            <div className="dashboard-grid">
+              <article className="dashboard-card">
+                <h3>Utilisateurs</h3>
+                <p>Gestion des comptes, rôles et permissions.</p>
+              </article>
+              <article className="dashboard-card">
+                <h3>Alertes</h3>
+                <p>Suivi en temps réel des événements signalés.</p>
+              </article>
+              <article className="dashboard-card">
+                <h3>Statistiques</h3>
+                <p>Analyse des activités et indicateurs de sécurité.</p>
+              </article>
+              <article className="dashboard-card">
+                <h3>Analytique</h3>
+                <p>Vue d’ensemble des usages et des interventions.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="tarifs" className="section section-surface">
           <div className="container">
             <SectionTitle
               eyebrow="Abonnements"
-              title="Choisissez la formule la plus adaptée"
-              text="Des offres pensées pour une protection simple, robuste et scalable."
+              title="Des offres simples pour une protection de qualité"
+              text="La solution grandit avec les besoins de chaque utilisateur ou de chaque structure."
             />
             <div className="pricing-grid">
               {plans.map((plan) => (
@@ -254,7 +567,11 @@ function HomePage() {
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
-                  <a href="#contact" className="btn btn-primary">
+                  <a
+                    onClick={() => scrollToSection("contact")}
+                    className="btn btn-primary"
+                    style={{ cursor: "pointer" }}
+                  >
                     Nous contacter
                   </a>
                 </article>
@@ -262,84 +579,61 @@ function HomePage() {
             </div>
           </div>
         </section>
-
-        <section
-          id="telechargement"
-          className="section container download-section"
-        >
-          <div className="download-card">
-            <div>
-              <SectionTitle
-                eyebrow="Téléchargement"
-                title="Accédez à Protect Assistance en quelques secondes"
-                text="Scannez le QR code ou choisissez votre plateforme pour installer l’application sur votre appareil."
-              />
-              <div className="hero-actions download-actions">
-                <a
-                  href="https://play.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-primary"
-                >
-                  Télécharger sur Android
-                </a>
-                <a
-                  href="https://www.apple.com/app-store/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-tertiary"
-                >
-                  Télécharger sur iOS
-                </a>
-              </div>
-            </div>
-            <div className="qr-card">
-              <img src={qrCodeImg} alt="QR code de téléchargement" />
-              <p>Scannez pour télécharger</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="section contact-section">
-          <div className="container contact-card">
-            <div className="contact-content">
-              <SectionTitle
-                eyebrow="Contact"
-                title="Une question ? Nous sommes à votre écoute"
-                text="Notre équipe peut vous accompagner dans votre projet de sécurité personnelle ou professionnelle."
-              />
-
-              <a
-                href="https://outlook.office.com/mail/deeplink/compose?to=serviceclient@protectassistance-app.fr&subject=Demande%20Protect%20Assistance"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary mail-button"
+        <section className="section container">
+          <SectionTitle
+            eyebrow="FAQ"
+            title="Questions fréquentes"
+            text="Tout ce qu’il faut savoir pour mieux comprendre le service et sa valeur."
+          />
+          <div className="faq-list">
+            {faqItems.map((item, index) => (
+              <article
+                className={`faq-item${openFaq === index ? " open" : ""}`}
+                key={item.question}
               >
-                serviceclient@protectassistance-app.fr
-              </a>
-            </div>
-
-            <div className="contact-box">
-              <p>
-                <strong>Disponibilité</strong>
-              </p>
-              <p>Support réactif</p>
-              <p>Réponse sous 24h</p>
-              <p>Protection et confidentialité au cœur du service</p>
-            </div>
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                >
+                  <span>{item.question}</span>
+                  <span className="faq-icon">+</span>
+                </button>
+                {openFaq === index && <p>{item.answer}</p>}
+              </article>
+            ))}
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <div className="container footer-content">
-          <p>© 2026 Protect Assistance. Tous droits réservés.</p>
-          <div className="footer-links">
-            <Link to="/mentions-legales">Mentions légales</Link>
-            <Link to="/politique-confidentialite">
-              Politique de confidentialité
-            </Link>
-            <Link to="/cgv">CGV</Link>
+        <div className="container footer-shell">
+          <div id="contact" className="footer-contact-card">
+            <div>
+              <p className="eyebrow">Contact</p>
+              <h3>Une question, un besoin ou un partenariat ?</h3>
+              <p>
+                L’équipe Protect Assistance vous répond rapidement pour vous
+                accompagner dans votre projet de sécurité personnelle.
+              </p>
+            </div>
+            <a
+              href="mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance"
+              className="btn"
+              style={{ background: "#d91f26", color: "white" }}
+            >
+              Écrire à l’équipe
+            </a>
+          </div>
+
+          <div className="footer-content">
+            <p>© 2026 Protect Assistance. Tous droits réservés.</p>
+            <div className="footer-links">
+              <Link to="/mentions-legales">Mentions légales</Link>
+              <Link to="/politique-confidentialite">
+                Politique de confidentialité
+              </Link>
+              <Link to="/cgv">CGV</Link>
+            </div>
           </div>
         </div>
       </footer>
@@ -360,7 +654,7 @@ function LegalPage({ title, intro, sections }) {
             />
             <div>
               <h1>Protect Assistance</h1>
-              <p>Votre ange gardien numérique</p>
+              <p>Sécurité personnelle intelligente</p>
             </div>
           </Link>
         </nav>
