@@ -1,18 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 import logo from "../image/logoProtectAssistance.jpg";
-import enlevementImg from "../image/enlevement.jpg";
-import agressionImg from "../image/agression.jpg";
-import secretImg from "../image/secret.jpg";
-import paniqueImg from "../image/panique.jpg";
-import jetImg from "../image/jet.jpg";
-import captureImg from "../image/capture.jpg";
-import alarmeImg from "../image/alarme.jpg";
-import voitureImg from "../image/voiture.jpg";
-import gpsImg from "../image/gps.jpg";
-import chuteImg from "../image/chute.png";
-import alzheimerImg from "../image/alzheimer.jpg";
-import qrCodeImg from "../image/qr-code.jpg";
+import appMobileImg from "../image/app_mobile.jpeg";
+import { featureCatalog, featureMap } from "./data/features";
 
 const reasons = [
   {
@@ -32,64 +22,6 @@ const reasons = [
     text: "Une protection pensée pour les situations d’urgence, du simple incident à l’urgence critique.",
     icon: "⚡",
     tag: "Réactivité",
-  },
-];
-
-const features = [
-  {
-    title: "Authentification sécurisée",
-    text: "JWT, comptes personnels et comptes familiaux pour un accès garanti et maîtrisé.",
-    image: enlevementImg,
-  },
-  {
-    title: "Profil protégé",
-    text: "Informations médicales, contacts d’urgence et données sensibles centralisées et protégées.",
-    image: agressionImg,
-  },
-  {
-    title: "Contacts prioritaires",
-    text: "Gérez rapidement les personnes à prévenir en cas d’alerte ou de besoin immédiat.",
-    image: secretImg,
-  },
-  {
-    title: "Familles connectées",
-    text: "Liez plusieurs membres de la famille et partagez l’état de sécurité en temps réel.",
-    image: paniqueImg,
-  },
-  {
-    title: "Alertes SOS",
-    text: "Déclenchez une alerte robuste avec historique, position et preuves associées.",
-    image: jetImg,
-  },
-  {
-    title: "Preuves numériques",
-    text: "Audio, photo et vidéo pour documenter les faits et sécuriser les démarches.",
-    image: captureImg,
-  },
-  {
-    title: "Zones de sécurité",
-    text: "Définissez un périmètre sécurisé et recevez une notification automatique si la zone est franchie.",
-    image: alarmeImg,
-  },
-  {
-    title: "Localisation GPS",
-    text: "Suivi en direct et intégration Google Maps pour une visibilité immédiate de l’état de la personne.",
-    image: gpsImg,
-  },
-  {
-    title: "Notifications instantanées",
-    text: "Push notifications via Firebase Cloud Messaging pour une diffusion instantanée.",
-    image: voitureImg,
-  },
-  {
-    title: "Prévention des chutes",
-    text: "Un système d’alerte autonome pour les incidents physiques et les situations de vulnérabilité.",
-    image: chuteImg,
-  },
-  {
-    title: "Protection Alzheimer",
-    text: "Des garde-fous pour accompagner les personnes à risque de se perdre ou d’être prises au dépourvu.",
-    image: alzheimerImg,
   },
 ];
 
@@ -131,14 +63,14 @@ const securityPillars = [
 
 const plans = [
   {
-    name: "Essentiel",
-    price: "19€ / mois",
+    name: "A la carte",
+    price: "7€ / bouton (par fonction)",
     description:
-      "Pour une protection de base avec alertes prioritaires et suivi simple.",
+      "Ideal pour activer uniquement les fonctions dont vous avez besoin.",
     features: [
-      "Alerte personnalisée",
-      "Contacts de confiance",
-      "Suivi de position",
+      "Paiement par fonction activee",
+      "Activation flexible des boutons",
+      "Sans engagement",
     ],
     featured: false,
   },
@@ -155,16 +87,51 @@ const plans = [
     featured: true,
   },
   {
-    name: "Entreprise",
-    price: "Sur mesure",
+    name: "Essentiel",
+    price: "19€ / mois",
     description:
-      "Adapté aux besoins spécifiques d’une structure ou d’un groupe.",
+      "Pour une protection de base avec alertes prioritaires et suivi simple.",
     features: [
-      "Administration centralisée",
-      "Support dédié",
-      "Intégrations métiers",
+      "Alerte personnalisée",
+      "Contacts de confiance",
+      "Suivi de position",
     ],
     featured: false,
+  },
+  {
+    name: "Pack Famille",
+    price: "30€ / mois (min. 3 pers)",
+    description:
+      "Concu pour proteger toute la famille avec un tarif groupe avantageux.",
+    features: [
+      "Jusqu'a plusieurs membres relies",
+      "Gestion des profils famille",
+      "Alertes partagees en temps reel",
+    ],
+    featured: false,
+  },
+];
+
+const alertModes = [
+  {
+    title: "Phrase secrète",
+    text: "Un mot-clé discret pour envoyer une alerte sans attirer l’attention en situation sensible.",
+    icon: "bi-chat-left-quote-fill",
+  },
+  {
+    title: "Secouement du téléphone",
+    text: "Un geste rapide pour déclencher l’alerte quand vous ne pouvez pas naviguer dans l’application.",
+    icon: "bi-phone-vibrate-fill",
+  },
+  {
+    title: "Jet du téléphone",
+    text: "Détection d’un mouvement violent pour lancer automatiquement une procédure d’assistance.",
+    icon: "bi-exclamation-triangle-fill",
+  },
+  {
+    title: "Bouton SOS",
+    text: "Un accès immédiat à l’alerte principale avec partage de position et notification des proches.",
+    icon: "bi-bell-fill",
   },
 ];
 
@@ -196,6 +163,26 @@ const faqItems = [
   },
 ];
 
+const CONTACT_MAILTO =
+  "mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance";
+
+function openMailClient(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
+  try {
+    const link = document.createElement("a");
+    link.href = CONTACT_MAILTO;
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch {
+    window.location.href = CONTACT_MAILTO;
+  }
+}
+
 function SectionTitle({ eyebrow, title, text }) {
   return (
     <div className="section-heading">
@@ -208,6 +195,7 @@ function SectionTitle({ eyebrow, title, text }) {
 
 function HomePage() {
   const [openFaq, setOpenFaq] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const securityRef = useRef(null);
   const workflowRef = useRef(null);
 
@@ -258,24 +246,9 @@ function HomePage() {
     }
   };
 
-  const openMailClient = (event) => {
-    if (event) {
-      event.preventDefault();
-    }
-
-    const mailtoLink =
-      "mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance";
-
-    try {
-      const link = document.createElement("a");
-      link.href = mailtoLink;
-      link.style.display = "none";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch {
-      window.location.href = mailtoLink;
-    }
+  const navigateToSection = (id) => {
+    scrollToSection(id);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -294,17 +267,33 @@ function HomePage() {
             </div>
           </Link>
 
-          <div className="nav-links">
-            <button type="button" onClick={() => scrollToSection("pourquoi")}>
+          <button
+            type="button"
+            className="navbar-toggle"
+            aria-label="Ouvrir le menu"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+          >
+            <i className={`bi ${isMenuOpen ? "bi-x-lg" : "bi-list"}`} />
+          </button>
+
+          <div className={`nav-links${isMenuOpen ? " open" : ""}`}>
+            <button type="button" onClick={() => navigateToSection("pourquoi")}>
               Pourquoi
+            </button>
+            <button type="button" onClick={() => navigateToSection("alertes")}>
+              Alertes
+            </button>
+            <button type="button" onClick={() => navigateToSection("tarifs")}>
+              Tarifs
             </button>
             <button
               type="button"
-              onClick={() => scrollToSection("fonctionnalites")}
+              onClick={() => navigateToSection("fonctionnalites")}
             >
               Fonctionnalités
             </button>
-            <button type="button" onClick={() => scrollToSection("contact")}>
+            <button type="button" onClick={() => navigateToSection("contact")}>
               Contact
             </button>
           </div>
@@ -320,47 +309,51 @@ function HomePage() {
               <p className="hero-badge">
                 Protection intelligente • Réactivité immédiate
               </p>
-              <h2>Votre proche est jamais seul, même loin de vous.</h2>
+              <h2>
+                Le but de Protect Assistance : alerter vite pour protéger un
+                proche.
+              </h2>
               <p className="hero-description">
-                Protect Assistance réunit une application Android, une API
-                robuste et un système d’alertes instantané pour protéger les
-                personnes vulnérables au quotidien.
+                En cas de danger, l’alerte peut être déclenchée par phrase
+                secrète, secouement, jet du téléphone ou bouton SOS. Les proches
+                sont prévenus immédiatement avec la position GPS.
               </p>
               <div className="hero-actions">
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={() => scrollToSection("telechargement")}
+                  onClick={() => scrollToSection("alertes")}
                   style={{ cursor: "pointer" }}
                 >
-                  Télécharger l’application
+                  Voir les types d’alerte
                 </button>
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => scrollToSection("fonctionnalites")}
+                  onClick={() => scrollToSection("tarifs")}
                   style={{ cursor: "pointer" }}
                 >
-                  Découvrir le produit
+                  Voir les tarifs
                 </button>
               </div>
               <div className="hero-highlights">
-                <span>JWT sécurisé</span>
-                <span>GPS en temps réel</span>
-                <span>Push notifications</span>
+                <span>Phrase secrète</span>
+                <span>Secouement</span>
+                <span>Jet du téléphone</span>
+                <span>SOS instantané</span>
               </div>
             </div>
 
             <div className="hero-visual" aria-hidden="true">
               <div className="phone-frame">
                 <div className="phone-notch" />
-                <div className="phone-screen">
+                <div className="phone-screen hero-mockup-screen">
                   <div className="screen-top">
                     <span className="chip">SOS actif</span>
                     <span className="signal-dot" />
                   </div>
                   <div className="screen-card main-card">
-                    <p>État de sécurité</p>
+                    <p>Etat de securite</p>
                     <h3>Tout va bien</h3>
                     <div className="mini-bars">
                       <span />
@@ -369,15 +362,90 @@ function HomePage() {
                     </div>
                   </div>
                   <div className="screen-card">
-                    <p>Dernière alerte</p>
-                    <strong>12:43 • Localisation partagée</strong>
+                    <p>Derniere alerte</p>
+                    <strong>12:43 • Localisation partagee</strong>
                   </div>
-                  <div className="screen-card compact">
+                  <div className="screen-card">
                     <p>Contacts</p>
                     <strong>M. Dupont • Famille</strong>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="fonctionnalites" className="section section-surface">
+          <div className="container">
+            <SectionTitle
+              eyebrow="Fonctionnalités"
+              title="9 fonctionnalités clés pour protéger en temps réel"
+              text="Chaque carte ouvre une page dédiée pour comprendre le scénario, le déclenchement et la valeur de la fonctionnalité."
+            />
+            <div className="feature-grid">
+              {featureCatalog.map((feature) => (
+                <Link
+                  to={`/fonctionnalites/${feature.slug}`}
+                  className="feature-card-link"
+                  key={feature.slug}
+                >
+                  <article className="feature-card">
+                    <img src={feature.image} alt={`Capture ${feature.title}`} />
+                    <div className="feature-overlay">
+                      <span className="feature-icon-chip">
+                        <i
+                          className={`bi ${feature.icon}`}
+                          aria-hidden="true"
+                        />
+                        {feature.title}
+                      </span>
+                      <h3>{feature.title}</h3>
+                      <p>{feature.shortDescription}</p>
+                      <span className="feature-card-cta">
+                        Voir la fonctionnalite
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="tarifs" className="section section-surface">
+          <div className="container">
+            <SectionTitle
+              eyebrow="Abonnements"
+              title="Des offres simples pour une protection de qualité"
+              text="La solution grandit avec les besoins de chaque utilisateur ou de chaque structure."
+            />
+            <div className="pricing-grid">
+              {plans.map((plan) => (
+                <article
+                  className={`pricing-card${plan.featured ? " featured" : ""}`}
+                  key={plan.name}
+                >
+                  {plan.featured && (
+                    <span className="pricing-badge">Le plus populaire</span>
+                  )}
+                  <h3>{plan.name}</h3>
+                  <p className="price">{plan.price}</p>
+                  <p className="plan-description">{plan.description}</p>
+                  <ul>
+                    {plan.features.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("contact")}
+                    className="btn btn-primary"
+                    style={{ cursor: "pointer" }}
+                  >
+                    Nous contacter
+                  </button>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -443,97 +511,6 @@ function HomePage() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="fonctionnalites" className="section section-surface">
-          <div className="container">
-            <SectionTitle
-              eyebrow="Fonctionnalités"
-              title="Un produit complet, conçu pour la confiance"
-              text="Chaque module a été conçu autour du besoin essentiel : réagir vite, protéger, documenter et rassurer."
-            />
-            <div className="feature-grid">
-              {features.map((feature) => (
-                <article className="feature-card" key={feature.title}>
-                  <img src={feature.image} alt="" />
-                  <div className="feature-overlay">
-                    <h3>{feature.title}</h3>
-                    <p>{feature.text}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section workflow-section">
-          <div className="container">
-            <div ref={workflowRef} className="workflow-shell">
-              <div className="workflow-grid">
-                <div className="workflow-story-card">
-                  <div className="workflow-intro-copy">
-                    <p className="eyebrow">Comment ça marche</p>
-                    <h2 className="workflow-title">
-                      Une protection simple, humaine et prête à agir
-                    </h2>
-                    <p className="workflow-description">
-                      Quand l’urgence se présente, l’expérience se simplifie
-                      pour guider chaque étape avec calme, clarté et présence.
-                    </p>
-                  </div>
-
-                  <div className="workflow-timeline compact-timeline">
-                    {workflow.map((step, index) => (
-                      <article
-                        className={`workflow-step-card ${index === 1 ? "is-active" : ""}`}
-                        key={step.title}
-                      >
-                        <div className="workflow-step-marker">
-                          <div className={`workflow-icon-wrap ${step.accent}`}>
-                            <i className={`bi ${step.icon}`} />
-                          </div>
-                          <span className="workflow-step-badge">
-                            {step.badge}
-                          </span>
-                        </div>
-                        <div className="workflow-step-content">
-                          <h3>{step.title}</h3>
-                          <p>{step.description}</p>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="workflow-visual-card">
-                  <div className="workflow-orb orb-one" />
-                  <div className="workflow-orb orb-two" />
-                  <div className="workflow-visual-pill">
-                    <i className="bi bi-heart-fill" />
-                    <span>Un accompagnement rassurant</span>
-                  </div>
-                  <div className="workflow-support-stack">
-                    <div className="support-bubble">
-                      <strong>1</strong>
-                      <span>Je clique</span>
-                    </div>
-                    <div className="support-bubble">
-                      <strong>2</strong>
-                      <span>Le système agit</span>
-                    </div>
-                    <div className="support-bubble">
-                      <strong>3</strong>
-                      <span>Les proches sont prévenus</span>
-                    </div>
-                  </div>
-                  <p className="workflow-visual-caption">
-                    Pas de jargon, juste une aide simple, rapide et à portée de
-                    main.
-                  </p>
                 </div>
               </div>
             </div>
@@ -612,23 +589,95 @@ function HomePage() {
             </div>
             <div className="mockup-stage">
               <div className="download-qr-card">
-                <div className="qr-placeholder" aria-label="Code QR décoratif">
+                <div
+                  className="app-preview"
+                  aria-label="Capture de l'application mobile"
+                >
                   <img
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=placeholder"
-                    alt="QR Code"
-                    className="qr-code"
+                    src={appMobileImg}
+                    alt="Capture de l'application mobile Protect Assistance"
+                    className="app-preview-image"
                   />
                 </div>
                 <p className="qr-caption">
                   Disponible prochainement sur Google Play
                 </p>
-                <a
+                {/* <a
                   href="mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance"
                   className="btn btn-primary"
                   onClick={(event) => openMailClient(event)}
                 >
                   Télécharger l’application
-                </a>
+                </a> */}
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="section workflow-section">
+          <div className="container">
+            <div ref={workflowRef} className="workflow-shell">
+              <div className="workflow-grid">
+                <div className="workflow-story-card">
+                  <div className="workflow-intro-copy">
+                    <p className="eyebrow">Comment ça marche</p>
+                    <h2 className="workflow-title">
+                      Une protection simple, humaine et prête à agir
+                    </h2>
+                    <p className="workflow-description">
+                      Quand l’urgence se présente, l’expérience se simplifie
+                      pour guider chaque étape avec calme, clarté et présence.
+                    </p>
+                  </div>
+
+                  <div className="workflow-timeline compact-timeline">
+                    {workflow.map((step, index) => (
+                      <article
+                        className={`workflow-step-card ${index === 1 ? "is-active" : ""}`}
+                        key={step.title}
+                      >
+                        <div className="workflow-step-marker">
+                          <div className={`workflow-icon-wrap ${step.accent}`}>
+                            <i className={`bi ${step.icon}`} />
+                          </div>
+                          <span className="workflow-step-badge">
+                            {step.badge}
+                          </span>
+                        </div>
+                        <div className="workflow-step-content">
+                          <h3>{step.title}</h3>
+                          <p>{step.description}</p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="workflow-visual-card">
+                  <div className="workflow-orb orb-one" />
+                  <div className="workflow-orb orb-two" />
+                  <div className="workflow-visual-pill">
+                    <i className="bi bi-heart-fill" />
+                    <span>Un accompagnement rassurant</span>
+                  </div>
+                  <div className="workflow-support-stack">
+                    <div className="support-bubble">
+                      <strong>1</strong>
+                      <span>Je clique</span>
+                    </div>
+                    <div className="support-bubble">
+                      <strong>2</strong>
+                      <span>Le système agit</span>
+                    </div>
+                    <div className="support-bubble">
+                      <strong>3</strong>
+                      <span>Les proches sont prévenus</span>
+                    </div>
+                  </div>
+                  <p className="workflow-visual-caption">
+                    Pas de jargon, juste une aide simple, rapide et à portée de
+                    main.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -662,42 +711,6 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="tarifs" className="section section-surface">
-          <div className="container">
-            <SectionTitle
-              eyebrow="Abonnements"
-              title="Des offres simples pour une protection de qualité"
-              text="La solution grandit avec les besoins de chaque utilisateur ou de chaque structure."
-            />
-            <div className="pricing-grid">
-              {plans.map((plan) => (
-                <article
-                  className={`pricing-card${plan.featured ? " featured" : ""}`}
-                  key={plan.name}
-                >
-                  {plan.featured && (
-                    <span className="pricing-badge">Le plus populaire</span>
-                  )}
-                  <h3>{plan.name}</h3>
-                  <p className="price">{plan.price}</p>
-                  <p className="plan-description">{plan.description}</p>
-                  <ul>
-                    {plan.features.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <a
-                    onClick={() => scrollToSection("contact")}
-                    className="btn btn-primary"
-                    style={{ cursor: "pointer" }}
-                  >
-                    Nous contacter
-                  </a>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
         <section className="section container">
           <SectionTitle
             eyebrow="FAQ"
@@ -765,6 +778,214 @@ function HomePage() {
   );
 }
 
+function FeatureDetailPage() {
+  const { slug } = useParams();
+  const feature = featureMap.get(slug);
+
+  const navigateToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  if (!feature) {
+    return (
+      <div className="legal-page-shell">
+        <header className="header legal-header">
+          <nav className="navbar container">
+            <Link to="/" className="brand">
+              <img
+                src={logo}
+                alt="Logo Protect Assistance"
+                className="logo-img"
+              />
+              <div>
+                <h1>Protect Assistance</h1>
+                <p>Securite personnelle intelligente</p>
+              </div>
+            </Link>
+          </nav>
+        </header>
+        <main className="container legal-content">
+          <div className="legal-intro">
+            <p className="eyebrow">Fonctionnalite introuvable</p>
+            <h2>Cette fonctionnalite n'existe pas</h2>
+            <p>
+              Retournez a la page d'accueil pour consulter les modules
+              disponibles.
+            </p>
+            <Link to="/" className="btn btn-primary">
+              Retour a l'accueil
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <header className="header">
+        <nav className="navbar container">
+          <Link to="/" className="brand">
+            <img
+              src={logo}
+              alt="Logo Protect Assistance"
+              className="logo-img"
+            />
+            <div>
+              <h1>Protect Assistance</h1>
+              <p>Securite personnelle intelligente</p>
+            </div>
+          </Link>
+
+          <div className="feature-nav-links">
+            <Link to="/">Accueil</Link>
+            <button type="button" onClick={() => navigateToSection("contact")}>
+              Contact
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section className="hero feature-hero">
+          <div className="hero-glow glow-one" />
+          <div className="hero-glow glow-two" />
+          <div className="container hero-shell">
+            <div className="hero-copy">
+              <p className="hero-badge">Fonctionnalite mobile</p>
+              <h2>{feature.title}</h2>
+              <p className="hero-description">{feature.heroDescription}</p>
+              <div className="hero-actions">
+                <Link to="/" className="btn btn-secondary">
+                  Retour aux fonctionnalites
+                </Link>
+                <a
+                  href={CONTACT_MAILTO}
+                  className="btn btn-primary"
+                  onClick={(event) => openMailClient(event)}
+                >
+                  Nous contacter
+                </a>
+              </div>
+            </div>
+
+            <div className="hero-visual" aria-hidden="true">
+              <div className="phone-frame">
+                <div className="phone-notch" />
+                <div className="phone-screen is-photo">
+                  <img
+                    src={feature.image}
+                    alt={`Capture ecran ${feature.title}`}
+                    className="phone-screen-image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section container">
+          <div className="feature-detail-shell">
+            <div className="feature-phone-showcase" aria-hidden="true">
+              <div className="phone-frame feature-phone-large">
+                <div className="phone-notch" />
+                <div className="phone-screen is-photo">
+                  <img
+                    src={feature.image}
+                    alt={`Grand visuel ${feature.title}`}
+                    className="phone-screen-image"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <article className="feature-detail-copy">
+              <p className="eyebrow">Explication detaillee</p>
+              <h3>{feature.title}</h3>
+              <p>{feature.detailedExplanation}</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="section section-surface">
+          <div className="container">
+            <SectionTitle
+              eyebrow="Comment ca fonctionne ?"
+              title="Un declenchement clair et progressif"
+              text="Chaque etape est pensee pour agir vite, sans complexifier l'usage en situation sensible."
+            />
+            <div className="feature-flow-grid">
+              {feature.howItWorks.map((step, index) => (
+                <article className="feature-flow-card" key={step}>
+                  <span className="feature-step-index">0{index + 1}</span>
+                  <p>{step}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section container">
+          <SectionTitle
+            eyebrow="Pourquoi utiliser cette fonctionnalite ?"
+            title="Des benefices concrets pour la protection quotidienne"
+            text="Cette fonctionnalite renforce la capacite de reaction des proches dans les moments critiques."
+          />
+          <div className="feature-value-grid">
+            {feature.whyUse.map((reason) => (
+              <article className="feature-value-card" key={reason}>
+                <i className={`bi ${feature.icon}`} aria-hidden="true" />
+                <p>{reason}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <div className="container footer-shell">
+          <div id="contact" className="footer-contact-card">
+            <div>
+              <p className="eyebrow">Contact</p>
+              <h3>Besoin d'une demo de cette fonctionnalite ?</h3>
+              <p>
+                L'equipe Protect Assistance vous accompagne pour configurer ce
+                module selon vos besoins.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="btn"
+              style={{
+                background: "#d91f26",
+                color: "white",
+                cursor: "pointer",
+              }}
+              onClick={(event) => openMailClient(event)}
+            >
+              Ecrire a l'equipe
+            </button>
+          </div>
+
+          <div className="footer-content">
+            <p>© 2026 Protect Assistance. Tous droits reserves.</p>
+            <div className="footer-links">
+              <Link to="/mentions-legales">Mentions legales</Link>
+              <Link to="/politique-confidentialite">
+                Politique de confidentialite
+              </Link>
+              <Link to="/cgv">CGV</Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
+
 function LegalPage({ title, intro, sections }) {
   return (
     <div className="legal-page-shell">
@@ -802,149 +1023,163 @@ function LegalPage({ title, intro, sections }) {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route
-        path="/mentions-legales"
-        element={
-          <LegalPage
-            title="Mentions légales"
-            intro="Les informations ci-dessous décrivent l’identité et les conditions d’utilisation du service Protect Assistance."
-            sections={[
-              {
-                title: "Éditeur du site",
-                text: "Protect Assistance est édité par la société Protect Assistance, responsable du site et du service proposé.",
-              },
-              {
-                title: "Hébergement",
-                text: "Le site est hébergé sur un serveur sécurisé dans le respect des standards de sécurité applicables.",
-              },
-              {
-                title: "Contact",
-                text: "Pour toute demande, vous pouvez nous contacter à l’adresse serviceclient@protectassistance-app.fr.",
-              },
-            ]}
-          />
-        }
-      />
-      <Route
-        path="/mentions-legales.html"
-        element={
-          <LegalPage
-            title="Mentions légales"
-            intro="Les informations ci-dessous décrivent l’identité et les conditions d’utilisation du service Protect Assistance."
-            sections={[
-              {
-                title: "Éditeur du site",
-                text: "Protect Assistance est édité par la société Protect Assistance, responsable du site et du service proposé.",
-              },
-              {
-                title: "Hébergement",
-                text: "Le site est hébergé sur un serveur sécurisé dans le respect des standards de sécurité applicables.",
-              },
-              {
-                title: "Contact",
-                text: "Pour toute demande, vous pouvez nous contacter à l’adresse serviceclient@protectassistance-app.fr.",
-              },
-            ]}
-          />
-        }
-      />
-      <Route
-        path="/politique-confidentialite"
-        element={
-          <LegalPage
-            title="Politique de confidentialité"
-            intro="Protect Assistance traite vos données avec rigueur et transparence dans le respect des exigences applicables."
-            sections={[
-              {
-                title: "Collecte des données",
-                text: "Nous collectons uniquement les données nécessaires au bon fonctionnement du service et à la sécurité des utilisateurs.",
-              },
-              {
-                title: "Utilisation",
-                text: "Les données sont utilisées pour fournir les services demandés, améliorer l’expérience et sécuriser l’accès.",
-              },
-              {
-                title: "Protection",
-                text: "Des mesures de sécurité adaptées sont mises en œuvre pour protéger vos données et votre vie privée.",
-              },
-            ]}
-          />
-        }
-      />
-      <Route
-        path="/politique-confidentialite.html"
-        element={
-          <LegalPage
-            title="Politique de confidentialité"
-            intro="Protect Assistance traite vos données avec rigueur et transparence dans le respect des exigences applicables."
-            sections={[
-              {
-                title: "Collecte des données",
-                text: "Nous collectons uniquement les données nécessaires au bon fonctionnement du service et à la sécurité des utilisateurs.",
-              },
-              {
-                title: "Utilisation",
-                text: "Les données sont utilisées pour fournir les services demandés, améliorer l’expérience et sécuriser l’accès.",
-              },
-              {
-                title: "Protection",
-                text: "Des mesures de sécurité adaptées sont mises en œuvre pour protéger vos données et votre vie privée.",
-              },
-            ]}
-          />
-        }
-      />
-      <Route
-        path="/cgv"
-        element={
-          <LegalPage
-            title="Conditions générales de vente"
-            intro="Les CGV définissent les conditions de souscription et d’utilisation des services Protect Assistance."
-            sections={[
-              {
-                title: "Souscription",
-                text: "L’abonnement est souscrit pour une durée définie selon la formule choisie par l’utilisateur.",
-              },
-              {
-                title: "Paiements",
-                text: "Les paiements sont traités selon les conditions détaillées lors de la souscription.",
-              },
-              {
-                title: "Résiliation",
-                text: "L’utilisateur peut mettre fin à son abonnement selon les conditions décrites dans l’offre contractuelle.",
-              },
-            ]}
-          />
-        }
-      />
-      <Route
-        path="/cgv.html"
-        element={
-          <LegalPage
-            title="Conditions générales de vente"
-            intro="Les CGV définissent les conditions de souscription et d’utilisation des services Protect Assistance."
-            sections={[
-              {
-                title: "Souscription",
-                text: "L’abonnement est souscrit pour une durée définie selon la formule choisie par l’utilisateur.",
-              },
-              {
-                title: "Paiements",
-                text: "Les paiements sont traités selon les conditions détaillées lors de la souscription.",
-              },
-              {
-                title: "Résiliation",
-                text: "L’utilisateur peut mettre fin à son abonnement selon les conditions décrites dans l’offre contractuelle.",
-              },
-            ]}
-          />
-        }
-      />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/fonctionnalites/:slug" element={<FeatureDetailPage />} />
+        <Route
+          path="/mentions-legales"
+          element={
+            <LegalPage
+              title="Mentions légales"
+              intro="Les informations ci-dessous décrivent l’identité et les conditions d’utilisation du service Protect Assistance."
+              sections={[
+                {
+                  title: "Éditeur du site",
+                  text: "Protect Assistance est édité par la société Protect Assistance, responsable du site et du service proposé.",
+                },
+                {
+                  title: "Hébergement",
+                  text: "Le site est hébergé sur un serveur sécurisé dans le respect des standards de sécurité applicables.",
+                },
+                {
+                  title: "Contact",
+                  text: "Pour toute demande, vous pouvez nous contacter à l’adresse serviceclient@protectassistance-app.fr.",
+                },
+              ]}
+            />
+          }
+        />
+        <Route
+          path="/mentions-legales.html"
+          element={
+            <LegalPage
+              title="Mentions légales"
+              intro="Les informations ci-dessous décrivent l’identité et les conditions d’utilisation du service Protect Assistance."
+              sections={[
+                {
+                  title: "Éditeur du site",
+                  text: "Protect Assistance est édité par la société Protect Assistance, responsable du site et du service proposé.",
+                },
+                {
+                  title: "Hébergement",
+                  text: "Le site est hébergé sur un serveur sécurisé dans le respect des standards de sécurité applicables.",
+                },
+                {
+                  title: "Contact",
+                  text: "Pour toute demande, vous pouvez nous contacter à l’adresse serviceclient@protectassistance-app.fr.",
+                },
+              ]}
+            />
+          }
+        />
+        <Route
+          path="/politique-confidentialite"
+          element={
+            <LegalPage
+              title="Politique de confidentialité"
+              intro="Protect Assistance traite vos données avec rigueur et transparence dans le respect des exigences applicables."
+              sections={[
+                {
+                  title: "Collecte des données",
+                  text: "Nous collectons uniquement les données nécessaires au bon fonctionnement du service et à la sécurité des utilisateurs.",
+                },
+                {
+                  title: "Utilisation",
+                  text: "Les données sont utilisées pour fournir les services demandés, améliorer l’expérience et sécuriser l’accès.",
+                },
+                {
+                  title: "Protection",
+                  text: "Des mesures de sécurité adaptées sont mises en œuvre pour protéger vos données et votre vie privée.",
+                },
+              ]}
+            />
+          }
+        />
+        <Route
+          path="/politique-confidentialite.html"
+          element={
+            <LegalPage
+              title="Politique de confidentialité"
+              intro="Protect Assistance traite vos données avec rigueur et transparence dans le respect des exigences applicables."
+              sections={[
+                {
+                  title: "Collecte des données",
+                  text: "Nous collectons uniquement les données nécessaires au bon fonctionnement du service et à la sécurité des utilisateurs.",
+                },
+                {
+                  title: "Utilisation",
+                  text: "Les données sont utilisées pour fournir les services demandés, améliorer l’expérience et sécuriser l’accès.",
+                },
+                {
+                  title: "Protection",
+                  text: "Des mesures de sécurité adaptées sont mises en œuvre pour protéger vos données et votre vie privée.",
+                },
+              ]}
+            />
+          }
+        />
+        <Route
+          path="/cgv"
+          element={
+            <LegalPage
+              title="Conditions générales de vente"
+              intro="Les CGV définissent les conditions de souscription et d’utilisation des services Protect Assistance."
+              sections={[
+                {
+                  title: "Souscription",
+                  text: "L’abonnement est souscrit pour une durée définie selon la formule choisie par l’utilisateur.",
+                },
+                {
+                  title: "Paiements",
+                  text: "Les paiements sont traités selon les conditions détaillées lors de la souscription.",
+                },
+                {
+                  title: "Résiliation",
+                  text: "L’utilisateur peut mettre fin à son abonnement selon les conditions décrites dans l’offre contractuelle.",
+                },
+              ]}
+            />
+          }
+        />
+        <Route
+          path="/cgv.html"
+          element={
+            <LegalPage
+              title="Conditions générales de vente"
+              intro="Les CGV définissent les conditions de souscription et d’utilisation des services Protect Assistance."
+              sections={[
+                {
+                  title: "Souscription",
+                  text: "L’abonnement est souscrit pour une durée définie selon la formule choisie par l’utilisateur.",
+                },
+                {
+                  title: "Paiements",
+                  text: "Les paiements sont traités selon les conditions détaillées lors de la souscription.",
+                },
+                {
+                  title: "Résiliation",
+                  text: "L’utilisateur peut mettre fin à son abonnement selon les conditions décrites dans l’offre contractuelle.",
+                },
+              ]}
+            />
+          }
+        />
+      </Routes>
+    </>
   );
 }
 
