@@ -260,6 +260,9 @@ function HomePage() {
               src={logo}
               alt="Logo Protect Assistance"
               className="logo-img"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
             <div>
               <h1>Protect Assistance</h1>
@@ -390,7 +393,13 @@ function HomePage() {
                   key={feature.slug}
                 >
                   <article className="feature-card">
-                    <img src={feature.image} alt={`Capture ${feature.title}`} />
+                    <img
+                      src={feature.image}
+                      alt={`Capture ${feature.title}`}
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                    />
                     <div className="feature-overlay">
                       <span className="feature-icon-chip">
                         <i
@@ -597,6 +606,9 @@ function HomePage() {
                     src={appMobileImg}
                     alt="Capture de l'application mobile Protect Assistance"
                     className="app-preview-image"
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                 </div>
                 <p className="qr-caption">
@@ -799,6 +811,9 @@ function FeatureDetailPage() {
                 src={logo}
                 alt="Logo Protect Assistance"
                 className="logo-img"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
               />
               <div>
                 <h1>Protect Assistance</h1>
@@ -833,6 +848,9 @@ function FeatureDetailPage() {
               src={logo}
               alt="Logo Protect Assistance"
               className="logo-img"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
             <div>
               <h1>Protect Assistance</h1>
@@ -880,6 +898,9 @@ function FeatureDetailPage() {
                     src={feature.image}
                     alt={`Capture ecran ${feature.title}`}
                     className="phone-screen-image"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
                   />
                 </div>
               </div>
@@ -897,6 +918,9 @@ function FeatureDetailPage() {
                     src={feature.image}
                     alt={`Grand visuel ${feature.title}`}
                     className="phone-screen-image"
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                 </div>
               </div>
@@ -996,6 +1020,9 @@ function LegalPage({ title, intro, sections }) {
               src={logo}
               alt="Logo Protect Assistance"
               className="logo-img"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
             <div>
               <h1>Protect Assistance</h1>
