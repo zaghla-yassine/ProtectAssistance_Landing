@@ -4,7 +4,7 @@ export const featureCatalog = [
     slug: "anti-enlevement",
     title: "Anti-enlevement",
     icon: "bi-shield-lock-fill",
-    image: "/images/features/feature-1.png",
+    image: "/images/feature-1.png",
     shortDescription:
       "Alerte automatique si l'enfant depasse une vitesse configuree, plus options d'urgence discretes.",
     heroDescription:
@@ -28,7 +28,7 @@ export const featureCatalog = [
     slug: "phrase-secrete",
     title: "Phrase secrete",
     icon: "bi-chat-left-quote-fill",
-    image: "/images/features/feature-2.png",
+    image: "/images/feature-2.png",
     shortDescription:
       "Une phrase codee permet de declencher une alerte silencieuse pendant un appel ou via reconnaissance.",
     heroDescription:
@@ -52,7 +52,7 @@ export const featureCatalog = [
     slug: "jet-du-telephone",
     title: "Jet du telephone",
     icon: "bi-exclamation-triangle-fill",
-    image: "/images/features/feature-3.png",
+    image: "/images/feature-3.png",
     shortDescription:
       "Detection d'un mouvement violent de type jet et envoi immediat d'une alerte.",
     heroDescription:
@@ -76,7 +76,7 @@ export const featureCatalog = [
     slug: "mode-panique-discret",
     title: "Mode panique discret",
     icon: "bi-eye-slash-fill",
-    image: "/images/features/feature-4.png",
+    image: "/images/feature-4.png",
     shortDescription:
       "Appui discret de 3 secondes pour envoyer une alerte silencieuse.",
     heroDescription:
@@ -100,7 +100,7 @@ export const featureCatalog = [
     slug: "secousse-du-telephone",
     title: "Secousse du telephone",
     icon: "bi-phone-vibrate-fill",
-    image: "/images/features/feature-5.png",
+    image: "/images/feature-5.png",
     shortDescription:
       "Secouer le telephone 5 fois envoie une alerte immediate avec position GPS.",
     heroDescription:
@@ -124,7 +124,7 @@ export const featureCatalog = [
     slug: "alarme-maison",
     title: "Alarme Maison",
     icon: "bi-house-door-fill",
-    image: "/images/features/feature-6.png",
+    image: "/images/feature-6.png",
     shortDescription:
       "Protection du domicile avec detection multi-signaux et declenchement immediat.",
     heroDescription:
@@ -148,7 +148,7 @@ export const featureCatalog = [
     slug: "accident-de-voiture",
     title: "Accident de voiture",
     icon: "bi-car-front-fill",
-    image: "/images/features/feature-7.png",
+    image: "/images/feature-7.png",
     shortDescription:
       "Detection automatique de situations compatibles avec un accident de voiture.",
     heroDescription:
@@ -172,7 +172,7 @@ export const featureCatalog = [
     slug: "chute-senior",
     title: "Chute Senior",
     icon: "bi-person-wheelchair",
-    image: "/images/features/feature-8.png",
+    image: "/images/feature-8.png",
     shortDescription:
       "Alerte vocale pour les seniors via detection de mots de detresse.",
     heroDescription:
@@ -196,7 +196,7 @@ export const featureCatalog = [
     slug: "zone-alzheimer",
     title: "Zone Alzheimer",
     icon: "bi-geo-alt-fill",
-    image: "/images/features/feature-9.png",
+    image: "/images/feature-9.png",
     shortDescription:
       "Alerte automatique si une personne sort d'une zone GPS securisee.",
     heroDescription:
