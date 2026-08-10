@@ -287,20 +287,17 @@ function HomePage() {
           </button>
 
           <div className={`nav-links${isMenuOpen ? " open" : ""}`}>
-            <button type="button" onClick={() => navigateToSection("pourquoi")}>
-              Pourquoi
-            </button>
-            <button type="button" onClick={() => navigateToSection("alertes")}>
-              Alertes
-            </button>
-            <button type="button" onClick={() => navigateToSection("tarifs")}>
-              Tarifs
-            </button>
             <button
               type="button"
               onClick={() => navigateToSection("fonctionnalites")}
             >
               Fonctionnalités
+            </button>
+            <button type="button" onClick={() => navigateToSection("tarifs")}>
+              Tarifs
+            </button>
+            <button type="button" onClick={() => navigateToSection("pourquoi")}>
+              Pourquoi
             </button>
             <button type="button" onClick={() => navigateToSection("contact")}>
               Contact
