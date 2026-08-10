@@ -4,73 +4,73 @@ export const featureCatalog = [
   {
     id: 1,
     slug: "anti-enlevement",
-    title: "Anti-enlevement",
+    title: "Anti-enlèvement",
     icon: "bi-shield-lock-fill",
     image: `${featureImageBasePath}/feature-1.png`,
     shortDescription:
-      "Alerte automatique si l'enfant depasse une vitesse configuree, plus options d'urgence discretes.",
+      "Alerte automatique si l'enfant dépasse une vitesse configurée, plus options d'urgence discrètes.",
     heroDescription:
-      "Les parents configurent un seuil de vitesse. Si l'enfant depasse ce seuil, une alerte est envoyee immediatement aux proches avec la position GPS.",
+      "Les parents configurent un seuil de vitesse. Si l'enfant dépasse ce seuil, une alerte est envoyée immédiatement aux proches avec la position GPS.",
     detailedExplanation:
-      "Cette fonctionnalite aide les familles a reagir plus vite face a un risque d'enlevement. Le parent choisit une vitesse limite (par exemple 70 km/h). Si le smartphone detecte un deplacement anormalement rapide, l'application declenche une alerte automatique et partage le contexte de securite.",
+      "Cette fonctionnalité aide les familles à réagir plus vite face à un risque d'enlèvement. Le parent choisit une vitesse limite (par exemple 70 km/h). Si le smartphone détecte un déplacement anormalement rapide, l'application déclenche une alerte automatique et partage le contexte de sécurité.",
     howItWorks: [
-      "Le parent configure une vitesse de declenchement dans l'application.",
+      "Le parent configure une vitesse de déclenchement dans l'application.",
       "L'application surveille les variations de vitesse en continu.",
-      "Si le seuil est depasse, les proches recoivent une alerte immediate.",
-      "L'enfant peut aussi declencher l'alerte via secousse, mode panique discret ou autres moyens d'urgence.",
+      "Si le seuil est dépassé, les proches reçoivent une alerte immédiate.",
+      "L'enfant peut aussi déclencher l'alerte via secousse, mode panique discret ou autres moyens d'urgence.",
     ],
     whyUse: [
-      "Reagir rapidement en cas de deplacement suspect.",
-      "Renforcer la securite des enfants lors des trajets.",
-      "Donner une visibilite immediate aux proches.",
+      "Réagir rapidement en cas de déplacement suspect.",
+      "Renforcer la sécurité des enfants lors des trajets.",
+      "Donner une visibilité immédiate aux proches.",
     ],
   },
   {
     id: 2,
     slug: "phrase-secrete",
-    title: "Phrase secrete",
+    title: "Phrase secrète",
     icon: "bi-chat-left-quote-fill",
     image: `${featureImageBasePath}/feature-2.png`,
     shortDescription:
-      "Une phrase codee permet de declencher une alerte silencieuse pendant un appel ou via reconnaissance.",
+      "Une phrase codée permet de déclencher une alerte silencieuse pendant un appel ou via reconnaissance.",
     heroDescription:
-      "Le parent definit une phrase de securite. Lorsqu'elle est prononcee, l'application envoie une alerte automatique avec geolocalisation.",
+      "Le parent définit une phrase de sécurité. Lorsqu'elle est prononcée, l'application envoie une alerte automatique avec géolocalisation.",
     detailedExplanation:
-      "La phrase secrete permet de demander de l'aide sans attirer l'attention. Exemple: 'Le dossier est bleu'. Si cette phrase est reconnue pendant un appel ou dans l'application, une alerte est transmise automatiquement avec la position GPS.",
+      "La phrase secrète permet de demander de l'aide sans attirer l'attention. Exemple : 'Le dossier est bleu'. Si cette phrase est reconnue, une alerte est transmise automatiquement avec la position GPS.",
     howItWorks: [
-      "Le parent enregistre une phrase secrete dans les parametres.",
-      "La phrase est reconnue pendant un appel ou un contexte configure.",
-      "L'application lance l'alerte sans action visible supplementaire.",
-      "Les contacts d'urgence recoivent la position en temps reel.",
+      "Le parent enregistre une phrase secrète dans les paramètres.",
+      "La phrase est reconnue.",
+      "L'application lance l'alerte sans action visible supplémentaire.",
+      "Les contacts d'urgence reçoivent la position en temps réel.",
     ],
     whyUse: [
-      "Alerter discretement sans escalation du risque.",
-      "Conserver un moyen de secours meme sous contrainte.",
+      "Alerter discrètement sans escalade du risque.",
+      "Conserver un moyen de secours même sous contrainte.",
       "Informer rapidement la famille avec une preuve de contexte.",
     ],
   },
   {
     id: 3,
     slug: "jet-du-telephone",
-    title: "Jet du telephone",
+    title: "Jet du téléphone",
     icon: "bi-exclamation-triangle-fill",
     image: `${featureImageBasePath}/feature-3.png`,
     shortDescription:
-      "Detection d'un mouvement violent de type jet et envoi immediat d'une alerte.",
+      "Détection d'un mouvement violent de type jet et envoi immédiat d'une alerte.",
     heroDescription:
-      "Si un mouvement anormal indique un jet violent du smartphone, l'application considere un risque et declenche une alerte.",
+      "Si un mouvement anormal indique un jet violent du smartphone, l'application considère un risque et déclenche une alerte.",
     detailedExplanation:
-      "Les capteurs de mouvement evaluent l'intensite et la signature d'un jet. Lorsqu'un comportement critique est detecte, l'application lance un protocole d'urgence afin de prevenir les proches sans attendre une action manuelle.",
+      "Les capteurs de mouvement évaluent l'intensité et la signature d'un jet. Lorsqu'un comportement critique est détecté, l'application lance un protocole d'urgence afin de prévenir les proches sans attendre une action manuelle.",
     howItWorks: [
-      "Analyse des accelerations brusques du smartphone.",
-      "Detection d'un schema de mouvement coherent avec un jet.",
-      "Declenchement automatique d'une alerte immediate.",
+      "Analyse des accélérations brusques du smartphone.",
+      "Détection d'un schéma de mouvement cohérent avec un jet.",
+      "Déclenchement automatique d'une alerte immédiate.",
       "Partage de la position et du contexte avec les contacts.",
     ],
     whyUse: [
-      "Utile quand l'utilisateur ne peut plus interagir avec son ecran.",
-      "Detection rapide des situations de danger physique.",
-      "Reduction du delai entre incident et assistance.",
+      "Utile quand l'utilisateur ne peut plus interagir avec son écran.",
+      "Détection rapide des situations de danger physique.",
+      "Réduction du délai entre incident et assistance.",
     ],
   },
   {
@@ -82,43 +82,43 @@ export const featureCatalog = [
     shortDescription:
       "Appui discret de 3 secondes pour envoyer une alerte silencieuse.",
     heroDescription:
-      "L'utilisateur peut declencher une alerte silencieuse depuis sa poche, sans attirer l'attention.",
+      "L'utilisateur peut déclencher une alerte silencieuse depuis sa poche, sans attirer l'attention.",
     detailedExplanation:
-      "Le mode panique discret est concu pour les moments ou la discretion est essentielle. Un appui long de 3 secondes suffit pour activer l'alerte, sans son ni signal visible, afin de proteger l'utilisateur face a un agresseur.",
+      "Le mode panique discret est conçu pour les moments où la discrétion est essentielle. Un appui long de 3 secondes suffit pour activer l'alerte, sans son ni signal visible, afin de protéger l'utilisateur face à un agresseur.",
     howItWorks: [
       "L'utilisateur maintient l'action de panique pendant 3 secondes.",
-      "Le systeme confirme le geste sans afficher d'alerte visible.",
-      "Les proches sont notifies immediatement.",
-      "La position GPS est partagee automatiquement.",
+      "Le système confirme le geste sans afficher d'alerte visible.",
+      "Les proches sont notifiés immédiatement.",
+      "La position GPS est partagée automatiquement.",
     ],
     whyUse: [
-      "Declenchement discret en environnement hostile.",
-      "Simple a memoriser et rapide a executer.",
-      "Permet de demander de l'aide sans se faire reperer.",
+      "Déclenchement discret en environnement hostile.",
+      "Simple à mémoriser et rapide à exécuter.",
+      "Permet de demander de l'aide sans se faire repérer.",
     ],
   },
   {
     id: 5,
     slug: "secousse-du-telephone",
-    title: "Secousse du telephone",
+    title: "Secousse du téléphone",
     icon: "bi-phone-vibrate-fill",
     image: `${featureImageBasePath}/feature-5.png`,
     shortDescription:
-      "Secouer le telephone 5 fois envoie une alerte immediate avec position GPS.",
+      "Secouer le téléphone 5 fois envoie une alerte immédiate avec position GPS.",
     heroDescription:
-      "Un geste simple et rapide: 5 secousses successives declenchent l'alerte sans navigation dans l'interface.",
+      "Un geste simple et rapide : 5 secousses successives déclenchent l'alerte sans navigation dans l'interface.",
     detailedExplanation:
-      "Cette fonctionnalite est pensee pour les situations d'urgence ou le temps manque. En secouant le smartphone cinq fois rapidement, l'application active instantanement l'alerte et transmet la position aux contacts choisis.",
+      "Cette fonctionnalité est pensée pour les situations d'urgence où le temps manque. En secouant le smartphone cinq fois rapidement, l'application active instantanément l'alerte et transmet la position aux contacts choisis.",
     howItWorks: [
-      "Le systeme detecte cinq secousses rapides.",
-      "Le schema est valide pour eviter les faux positifs.",
-      "L'alerte est envoyee en quelques secondes.",
-      "Les proches recoivent la geolocalisation.",
+      "Le système détecte cinq secousses rapides.",
+      "Le schéma est validé pour éviter les faux positifs.",
+      "L'alerte est envoyée en quelques secondes.",
+      "Les proches reçoivent la géolocalisation.",
     ],
     whyUse: [
       "Aucune recherche de bouton en situation de stress.",
       "Compatible avec des usages en mouvement.",
-      "Declenchement quasi instantane.",
+      "Déclenchement quasi instantané.",
     ],
   },
   {
@@ -128,21 +128,21 @@ export const featureCatalog = [
     icon: "bi-house-door-fill",
     image: `${featureImageBasePath}/feature-6.png`,
     shortDescription:
-      "Protection du domicile avec detection multi-signaux et declenchement immediat.",
+      "Protection du domicile avec détection multi-signaux et déclenchement immédiat.",
     heroDescription:
-      "Sirenes, phrase secrete, mots de detresse ou gestes d'urgence: plusieurs signaux peuvent activer l'alerte maison.",
+      "Sirènes, phrase secrète, mots de détresse ou gestes d'urgence : plusieurs signaux peuvent activer l'alerte maison.",
     detailedExplanation:
-      "Alarme Maison centralise plusieurs methodes de detection pour proteger le domicile. La fonctionnalite reagit aux signaux sonores, aux gestes d'urgence et aux mots de detresse ('Au secours', 'A l'aide') afin de prevenir rapidement la famille.",
+      "Alarme Maison centralise plusieurs méthodes de détection pour renforcer la protection du domicile. La fonctionnalité peut réagir aux signaux sonores, aux gestes d’urgence et aux mots de détresse tels que « Au secours » ou « À l’aide », afin de prévenir rapidement la famille. Elle intègre également des moyens de déclenchement discrets et rapides : une simple pression sur l’écran peut activer un mode panique en arrière-plan, permettant de lancer une alerte sans attirer l’attention. L’alerte peut également être déclenchée en cas de jet du téléphone ou lorsque celui-ci est secoué de manière répétée. Enfin, la détection du déclenchement d’une alarme incendie permet également de transmettre rapidement une alerte à la famille afin de favoriser une intervention dans les meilleurs délais.",
     howItWorks: [
       "Activation du mode maison dans l'application.",
-      "Ecoute des signaux critiques (sirene incendie, mots de detresse).",
-      "Prise en compte des gestes d'urgence (jet, secousse, panique discret, phrase secrete).",
-      "Envoi automatique de l'alerte aux proches en cas de detection.",
+      "Écoute des signaux critiques (sirène incendie, mots de détresse).",
+      "Prise en compte des gestes d'urgence (jet, secousse, panique discret, phrase secrète).",
+      "Envoi automatique de l'alerte aux proches en cas de détection.",
     ],
     whyUse: [
-      "Protection renforcee de la maison.",
-      "Plusieurs mecanismes couvrent differents scenarios.",
-      "Alerte immediate meme si l'utilisateur ne peut pas appeler.",
+      "Protection renforcée de la maison.",
+      "Plusieurs mécanismes couvrent différents scénarios.",
+      "Alerte immédiate même si l'utilisateur ne peut pas appeler.",
     ],
   },
   {
@@ -152,21 +152,21 @@ export const featureCatalog = [
     icon: "bi-car-front-fill",
     image: `${featureImageBasePath}/feature-7.png`,
     shortDescription:
-      "Detection automatique de situations compatibles avec un accident de voiture.",
+      "Détection automatique de situations compatibles avec un accident de voiture.",
     heroDescription:
-      "Le systeme analyse les chocs et mots de detresse pour notifier rapidement les contacts d'urgence.",
+      "Le système analyse les chocs et mots de détresse pour notifier rapidement les contacts d'urgence.",
     detailedExplanation:
-      "En cas de choc ou d'evenement brusque, cette fonctionnalite peut detecter des signaux associes a un accident. Les mots de detresse comme 'Au secours' ou 'A l'aide' renforcent la detection afin de declencher une alerte aux proches.",
+      "En cas de choc ou d'événement brusque, cette fonctionnalité peut détecter des signaux associés à un accident. Les mots de détresse comme 'Au secours' ou 'À l'aide' renforcent la détection afin de déclencher une alerte aux proches.",
     howItWorks: [
-      "Detection d'un jet ou impact violent du smartphone.",
-      "Analyse contextuelle de mots de detresse.",
+      "Détection d'un jet ou impact violent du smartphone.",
+      "Analyse contextuelle de mots de détresse.",
       "Validation des signaux critiques.",
-      "Notification immediate des contacts d'urgence.",
+      "Notification immédiate des contacts d'urgence.",
     ],
     whyUse: [
       "Utile quand la victime ne peut pas appeler.",
-      "Reduction du temps de reaction des proches.",
-      "Amelioration de la prise en charge apres incident.",
+      "Réduction du temps de réaction des proches.",
+      "Amélioration de la prise en charge après incident.",
     ],
   },
   {
@@ -176,20 +176,20 @@ export const featureCatalog = [
     icon: "bi-person-wheelchair",
     image: `${featureImageBasePath}/feature-8.png`,
     shortDescription:
-      "Alerte vocale pour les seniors via detection de mots de detresse.",
+      "Alerte vocale pour les seniors via détection de mots de détresse.",
     heroDescription:
-      "Concue pour les personnes agees, la fonctionnalite previens la famille en cas d'appel a l'aide.",
+      "Conçue pour les personnes âgées, la fonctionnalité prévient la famille en cas d'appel à l'aide.",
     detailedExplanation:
-      "Chute Senior vise a proteger les personnes vulnerables. Si l'application detecte des mots comme 'Au secours' ou 'A l'aide', elle envoie une alerte immediate afin que la famille puisse intervenir rapidement.",
+      "Chute Senior vise à protéger les personnes vulnérables. Si l’application détecte des mots comme « Au secours » ou « À l’aide », ou détecte un choc pouvant indiquer une chute, elle déclenche automatiquement une alerte afin que la famille puisse intervenir rapidement.",
     howItWorks: [
-      "Le mode senior est active dans l'application.",
-      "Le systeme surveille les mots de detresse configures.",
-      "En cas de detection, une alerte est emise automatiquement.",
-      "Les proches recoivent la localisation et le contexte.",
+      "Le mode senior est activé dans l'application.",
+      "Le système surveille les mots de détresse configurés.",
+      "En cas de détection, une alerte est émise automatiquement.",
+      "Les proches reçoivent la localisation et le contexte.",
     ],
     whyUse: [
-      "Apporte une couche de securite au quotidien.",
-      "Rassure la famille meme a distance.",
+      "Apporte une couche de sécurité au quotidien.",
+      "Rassure la famille même à distance.",
       "Facilite une intervention rapide en cas de chute.",
     ],
   },
@@ -200,21 +200,21 @@ export const featureCatalog = [
     icon: "bi-geo-alt-fill",
     image: `${featureImageBasePath}/feature-9.png`,
     shortDescription:
-      "Alerte automatique si une personne sort d'une zone GPS securisee.",
+      "Alerte automatique si une personne sort d'une zone GPS sécurisée.",
     heroDescription:
-      "Les proches definissent un point et un rayon de securite. Toute sortie de zone declenche une alerte avec position.",
+      "Les proches définissent un point et un rayon de sécurité. Toute sortie de zone déclenche une alerte avec position.",
     detailedExplanation:
-      "Zone Alzheimer permet de definir un perimetre de securite autour d'un lieu de reference. Si la personne suivie sort du rayon configure (ex: 50 metres), les proches sont prevenus automatiquement avec sa position en temps reel.",
+      "Zone Alzheimer permet de définir un périmètre de sécurité autour d'un lieu de référence. Si la personne suivie sort du rayon configuré (ex : 50 mètres), les proches sont prévenus automatiquement avec sa position en temps réel.",
     howItWorks: [
-      "Selection d'un point GPS sur la carte.",
-      "Definition d'un rayon de securite.",
-      "Surveillance continue des entrees/sorties de zone.",
-      "Alerte immediate avec geolocalisation en cas de depassement.",
+      "Sélection d'un point GPS sur la carte.",
+      "Définition d'un rayon de sécurité.",
+      "Surveillance continue des entrées/sorties de zone.",
+      "Alerte immédiate avec géolocalisation en cas de dépassement.",
     ],
     whyUse: [
-      "Particulierement adapte a l'accompagnement Alzheimer.",
-      "Aide a prevenir l'errance et la desorientation.",
-      "Donne une meilleure reactivite aux aidants.",
+      "Particulièrement adaptée à l'accompagnement Alzheimer.",
+      "Aide à prévenir l'errance et la désorientation.",
+      "Donne une meilleure réactivité aux aidants.",
     ],
   },
 ];

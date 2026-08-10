@@ -6,16 +6,22 @@ import { featureCatalog, featureMap } from "./data/features";
 
 const reasons = [
   {
-    title: "Personnes âgées vivant seules",
-    text: "Un accompagnement discret et fiable pour réagir dès qu’une situation devient dangereuse.",
+    title: "Alerte anti-enlèvement",
+    text: "Un système d’alerte dédié pour réagir rapidement en cas de risque d’enlèvement.",
     icon: "🛡️",
-    tag: "Sécurité discrète",
+    tag: "Alerte prioritaire",
   },
   {
-    title: "Maladies neurodégénératives",
-    text: "Des alertes intelligentes pour aider à sécuriser les personnes exposées au risque de disparition ou de chute.",
+    title: "Sécurité à la personne",
+    text: "Une protection quotidienne pensée pour rassurer et assister la personne en situation de danger.",
     icon: "🧭",
-    tag: "Accompagnement",
+    tag: "Protection humaine",
+  },
+  {
+    title: "Personnes âgées vivant seules",
+    text: "Un accompagnement discret et fiable pour réagir dès qu’une situation devient dangereuse.",
+    icon: "👵",
+    tag: "Assistance senior",
   },
   {
     title: "Sécurité personnelle",
@@ -63,12 +69,12 @@ const securityPillars = [
 
 const plans = [
   {
-    name: "A la carte",
+    name: "À la carte",
     price: "7€ / bouton (par fonction)",
     description:
-      "Ideal pour activer uniquement les fonctions dont vous avez besoin.",
+      "Idéal pour activer uniquement les fonctions dont vous avez besoin.",
     features: [
-      "Paiement par fonction activee",
+      "Paiement par fonction activée",
       "Activation flexible des boutons",
       "Sans engagement",
     ],
@@ -102,11 +108,11 @@ const plans = [
     name: "Pack Famille",
     price: "30€ / mois (min. 3 pers)",
     description:
-      "Concu pour proteger toute la famille avec un tarif groupe avantageux.",
+      "Conçu pour protéger toute la famille avec un tarif groupe avantageux.",
     features: [
-      "Jusqu'a plusieurs membres relies",
+      "Jusqu'à plusieurs membres reliés",
       "Gestion des profils famille",
-      "Alertes partagees en temps reel",
+      "Alertes partagées en temps réel",
     ],
     featured: false,
   },
@@ -144,12 +150,12 @@ const faqItems = [
   {
     question: "Qui reçoit les notifications ?",
     answer:
-      "Les proches désignés par l’utilisateur reçoivent des notifications push en temps réel ainsi qu’un accès à l’historique de l’alerte.",
+      "Les proches désignés par l’utilisateur reçoivent des notifications en temps réel ainsi qu’un accès à l’historique de l’alerte.",
   },
   {
     question: "Est-ce que mes données sont sécurisées ?",
     answer:
-      "Oui. Protect Assistance s’appuie sur l’authentification JWT, des APIs protégées, des mots de passe sécurisés et un stockage cloud contrôlé.",
+      "Oui. Protect Assistance s’appuie sur l’authentification JWT, des APIs protégées, des mots de passe chiffrés, un serveur sécurisé et un stockage cloud contrôlé.",
   },
   {
     question: "Peut-on ajouter plusieurs membres de la famille ?",
@@ -319,7 +325,7 @@ function HomePage() {
               <p className="hero-description">
                 En cas de danger, l’alerte peut être déclenchée par phrase
                 secrète, secouement, jet du téléphone ou bouton SOS. Les proches
-                sont prévenus immédiatement avec la position GPS.
+                sont prévenus immédiatement avec la position GPS en temps réel.
               </p>
               <div className="hero-actions">
                 <button
@@ -356,7 +362,7 @@ function HomePage() {
                     <span className="signal-dot" />
                   </div>
                   <div className="screen-card main-card">
-                    <p>Etat de securite</p>
+                    <p>État de sécurité</p>
                     <h3>Tout va bien</h3>
                     <div className="mini-bars">
                       <span />
@@ -365,8 +371,8 @@ function HomePage() {
                     </div>
                   </div>
                   <div className="screen-card">
-                    <p>Derniere alerte</p>
-                    <strong>12:43 • Localisation partagee</strong>
+                    <p>Dernière alerte</p>
+                    <strong>12:43 • Localisation partagée</strong>
                   </div>
                   <div className="screen-card">
                     <p>Contacts</p>
@@ -411,7 +417,7 @@ function HomePage() {
                       <h3>{feature.title}</h3>
                       <p>{feature.shortDescription}</p>
                       <span className="feature-card-cta">
-                        Voir la fonctionnalite
+                        Voir la fonctionnalité
                       </span>
                     </div>
                   </article>
@@ -489,13 +495,13 @@ function HomePage() {
                   <div>
                     <SectionTitle
                       eyebrow="À propos"
-                      title="Notre mission : sécuriser sans surcharger"
+                      title="Notre mission : protéger sans compliquer"
                       text="Protect Assistance veut offrir une protection discrète, fiable et rapide à ceux qui ont besoin d’un soutien en cas d’urgence."
                     />
                     <p className="about-intro">
-                      Chaque interaction a été pensée pour réduire la friction,
-                      donner confiance et permettre une réaction rapide dans les
-                      moments critiques.
+                      Chaque interaction a été pensée pour simplifier chaque
+                      démarche, donner confiance et permettre une réaction
+                      rapide dans les moments critiques.
                     </p>
                     <div className="about-pill-list">
                       <span>Réactivité immédiate</span>
@@ -532,7 +538,7 @@ function HomePage() {
             title="Une protection robuste, pensée pour l’urgence"
             text="Protect Assistance allie une architecture fiable, des mécanismes
           d’authentification solides et une expérience sécurisée, pour
-          agir vite sans compromettre la confiance."
+          agir vite sans compromettre la sécurité."
           />
 
           <div ref={securityRef} className="container security-revamp">
@@ -572,7 +578,7 @@ function HomePage() {
               <SectionTitle
                 eyebrow="Application mobile"
                 title="Une expérience mobile élégante et utile"
-                text="Le parcours utilisateur a été pensé pour rester simple, instinctif et rassurant dans les moments critiques."
+                text="L'application mobile a été pensé pour rester simple, instinctif et rassurant dans les moments critiques."
               />
               <div className="feature-list">
                 <div>
@@ -591,7 +597,7 @@ function HomePage() {
                   <strong>Alertes en direct</strong>
                   <p>
                     GPS, notifications et zones de sécurité en une seule
-                    expérience.
+                    solution.
                   </p>
                 </div>
               </div>
@@ -695,34 +701,6 @@ function HomePage() {
           </div>
         </section>
 
-        <section className="section section-surface">
-          <div className="container">
-            <SectionTitle
-              eyebrow="Admin dashboard"
-              title="Un futur tableau de bord prêt pour l’observation"
-              text="L’interface d’administration permettra de superviser les utilisateurs, les alertes et les statistiques."
-            />
-            <div className="dashboard-grid">
-              <article className="dashboard-card">
-                <h3>Utilisateurs</h3>
-                <p>Gestion des comptes, rôles et permissions.</p>
-              </article>
-              <article className="dashboard-card">
-                <h3>Alertes</h3>
-                <p>Suivi en temps réel des événements signalés.</p>
-              </article>
-              <article className="dashboard-card">
-                <h3>Statistiques</h3>
-                <p>Analyse des activités et indicateurs de sécurité.</p>
-              </article>
-              <article className="dashboard-card">
-                <h3>Analytique</h3>
-                <p>Vue d’ensemble des usages et des interventions.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
         <section className="section container">
           <SectionTitle
             eyebrow="FAQ"
@@ -817,21 +795,21 @@ function FeatureDetailPage() {
               />
               <div>
                 <h1>Protect Assistance</h1>
-                <p>Securite personnelle intelligente</p>
+                <p>Sécurité personnelle intelligente</p>
               </div>
             </Link>
           </nav>
         </header>
         <main className="container legal-content">
           <div className="legal-intro">
-            <p className="eyebrow">Fonctionnalite introuvable</p>
-            <h2>Cette fonctionnalite n'existe pas</h2>
+            <p className="eyebrow">Fonctionnalité introuvable</p>
+            <h2>Cette fonctionnalité n'existe pas</h2>
             <p>
-              Retournez a la page d'accueil pour consulter les modules
+              Retournez à la page d'accueil pour consulter les modules
               disponibles.
             </p>
             <Link to="/" className="btn btn-primary">
-              Retour a l'accueil
+              Retour à l'accueil
             </Link>
           </div>
         </main>
@@ -854,7 +832,7 @@ function FeatureDetailPage() {
             />
             <div>
               <h1>Protect Assistance</h1>
-              <p>Securite personnelle intelligente</p>
+              <p>Sécurité personnelle intelligente</p>
             </div>
           </Link>
 
@@ -873,12 +851,12 @@ function FeatureDetailPage() {
           <div className="hero-glow glow-two" />
           <div className="container hero-shell">
             <div className="hero-copy">
-              <p className="hero-badge">Fonctionnalite mobile</p>
+              <p className="hero-badge">Fonctionnalité mobile</p>
               <h2>{feature.title}</h2>
               <p className="hero-description">{feature.heroDescription}</p>
               <div className="hero-actions">
                 <Link to="/" className="btn btn-secondary">
-                  Retour aux fonctionnalites
+                  Retour aux fonctionnalités
                 </Link>
                 <a
                   href={CONTACT_MAILTO}
@@ -896,7 +874,7 @@ function FeatureDetailPage() {
                 <div className="phone-screen is-photo">
                   <img
                     src={feature.image}
-                    alt={`Capture ecran ${feature.title}`}
+                    alt={`Capture écran ${feature.title}`}
                     className="phone-screen-image"
                     loading="eager"
                     decoding="async"
@@ -927,7 +905,7 @@ function FeatureDetailPage() {
             </div>
 
             <article className="feature-detail-copy">
-              <p className="eyebrow">Explication detaillee</p>
+              <p className="eyebrow">Explication détaillée</p>
               <h3>{feature.title}</h3>
               <p>{feature.detailedExplanation}</p>
             </article>
@@ -937,9 +915,9 @@ function FeatureDetailPage() {
         <section className="section section-surface">
           <div className="container">
             <SectionTitle
-              eyebrow="Comment ca fonctionne ?"
-              title="Un declenchement clair et progressif"
-              text="Chaque etape est pensee pour agir vite, sans complexifier l'usage en situation sensible."
+              eyebrow="Comment ça fonctionne ?"
+              title="Un déclenchement clair et progressif"
+              text="Chaque étape est pensée pour agir vite, sans complexifier l'usage en situation sensible."
             />
             <div className="feature-flow-grid">
               {feature.howItWorks.map((step, index) => (
@@ -954,9 +932,9 @@ function FeatureDetailPage() {
 
         <section className="section container">
           <SectionTitle
-            eyebrow="Pourquoi utiliser cette fonctionnalite ?"
-            title="Des benefices concrets pour la protection quotidienne"
-            text="Cette fonctionnalite renforce la capacite de reaction des proches dans les moments critiques."
+            eyebrow="Pourquoi utiliser cette fonctionnalité ?"
+            title="Des bénéfices concrets pour la protection quotidienne"
+            text="Cette fonctionnalité renforce la capacité de réaction des proches dans les moments critiques."
           />
           <div className="feature-value-grid">
             {feature.whyUse.map((reason) => (
@@ -974,9 +952,9 @@ function FeatureDetailPage() {
           <div id="contact" className="footer-contact-card">
             <div>
               <p className="eyebrow">Contact</p>
-              <h3>Besoin d'une demo de cette fonctionnalite ?</h3>
+              <h3>Besoin d'une démo de cette fonctionnalité ?</h3>
               <p>
-                L'equipe Protect Assistance vous accompagne pour configurer ce
+                L'équipe Protect Assistance vous accompagne pour configurer ce
                 module selon vos besoins.
               </p>
             </div>
@@ -990,16 +968,16 @@ function FeatureDetailPage() {
               }}
               onClick={(event) => openMailClient(event)}
             >
-              Ecrire a l'equipe
+              Écrire à l'équipe
             </button>
           </div>
 
           <div className="footer-content">
-            <p>© 2026 Protect Assistance. Tous droits reserves.</p>
+            <p>© 2026 Protect Assistance. Tous droits réservés.</p>
             <div className="footer-links">
-              <Link to="/mentions-legales">Mentions legales</Link>
+              <Link to="/mentions-legales">Mentions légales</Link>
               <Link to="/politique-confidentialite">
-                Politique de confidentialite
+                Politique de confidentialité
               </Link>
               <Link to="/cgv">CGV</Link>
             </div>
