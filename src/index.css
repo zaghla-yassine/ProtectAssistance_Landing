@@ -1622,7 +1622,21 @@ a {
 }
 
 .pricing-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.pricing-grid-top {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pricing-grid-bottom {
+  margin-top: 1.15rem;
+  grid-template-columns: repeat(2, minmax(280px, 360px));
+  justify-content: center;
+}
+
+.pricing-grid-bottom .pricing-card {
+  width: 100%;
 }
 
 .pricing-card {
@@ -1829,10 +1843,27 @@ a {
   .feature-grid,
   .tech-grid,
   .dashboard-grid,
-  .pricing-grid,
   .reason-grid,
   .alert-mode-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricing-grid,
+  .pricing-grid-top,
+  .pricing-grid-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-grid-bottom {
+    margin-top: 1rem;
+  }
+
+  .pricing-grid-bottom .pricing-card {
+    max-width: none;
+  }
+
+  .pricing-grid .pricing-card {
+    grid-column: auto;
   }
 
   .feature-detail-shell,
@@ -1985,6 +2016,10 @@ a {
   .reason-grid,
   .alert-mode-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-grid .pricing-card {
+    grid-column: auto;
   }
 
   .feature-flow-grid,

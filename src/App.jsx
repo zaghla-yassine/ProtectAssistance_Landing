@@ -69,6 +69,18 @@ const securityPillars = [
 
 const plans = [
   {
+    name: "Essai gratuit",
+    price: "0€ pendant 7 jours",
+    description:
+      "Testez Protect Assistance gratuitement pendant 7 jours avant de choisir un forfait.",
+    features: [
+      "Accès complet aux fonctionnalités",
+      "Aucun engagement pendant l'essai",
+      "Choix du forfait à la fin de l'essai",
+    ],
+    featured: false,
+  },
+  {
     name: "À la carte",
     price: "7€ / bouton (par fonction)",
     description:
@@ -77,6 +89,19 @@ const plans = [
       "Paiement par fonction activée",
       "Activation flexible des boutons",
       "Sans engagement",
+    ],
+    featured: false,
+  },
+
+  {
+    name: "Essentiel",
+    price: "19€ / mois",
+    description:
+      "Pour une protection de base avec alertes prioritaires et suivi simple.",
+    features: [
+      "Alerte personnalisée",
+      "Contacts de confiance",
+      "Suivi de position",
     ],
     featured: false,
   },
@@ -91,18 +116,6 @@ const plans = [
       "Détection avancée",
     ],
     featured: true,
-  },
-  {
-    name: "Essentiel",
-    price: "19€ / mois",
-    description:
-      "Pour une protection de base avec alertes prioritaires et suivi simple.",
-    features: [
-      "Alerte personnalisée",
-      "Contacts de confiance",
-      "Suivi de position",
-    ],
-    featured: false,
   },
   {
     name: "Pack Famille",
@@ -204,6 +217,8 @@ function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const securityRef = useRef(null);
   const workflowRef = useRef(null);
+  const firstRowPlans = plans.slice(0, 3);
+  const secondRowPlans = plans.slice(3);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -431,8 +446,36 @@ function HomePage() {
               title="Des offres simples pour une protection de qualité"
               text="La solution grandit avec les besoins de chaque utilisateur ou de chaque structure."
             />
-            <div className="pricing-grid">
-              {plans.map((plan) => (
+            <div className="pricing-grid pricing-grid-top">
+              {firstRowPlans.map((plan) => (
+                <article
+                  className={`pricing-card${plan.featured ? " featured" : ""}`}
+                  key={plan.name}
+                >
+                  {plan.featured && (
+                    <span className="pricing-badge">Le plus populaire</span>
+                  )}
+                  <h3>{plan.name}</h3>
+                  <p className="price">{plan.price}</p>
+                  <p className="plan-description">{plan.description}</p>
+                  <ul>
+                    {plan.features.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection("contact")}
+                    className="btn btn-primary"
+                    style={{ cursor: "pointer" }}
+                  >
+                    Nous contacter
+                  </button>
+                </article>
+              ))}
+            </div>
+            <div className="pricing-grid pricing-grid-bottom">
+              {secondRowPlans.map((plan) => (
                 <article
                   className={`pricing-card${plan.featured ? " featured" : ""}`}
                   key={plan.name}
