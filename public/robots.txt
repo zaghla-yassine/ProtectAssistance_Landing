@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://protect-assistance.fr/sitemap.xml
