@@ -184,6 +184,38 @@ const faqItems = [
 
 const CONTACT_MAILTO =
   "mailto:serviceclient@protectassistance-app.fr?subject=Demande%20Protect%20Assistance";
+const MAINTENANCE_MODE = true; // Change to false to disable maintenance mode
+
+function MaintenancePage() {
+  return (
+    <div className="maintenance-page">
+      <div className="maintenance-card">
+        <img
+          src={logo}
+          alt="Logo Protect Assistance"
+          className="maintenance-logo"
+        />
+        <p className="eyebrow maintenance-eyebrow">Site en maintenance</p>
+        <h1>Nous revenons très vite.</h1>
+        <p className="maintenance-copy">
+          Protect Assistance est actuellement en cours de mise à jour pour
+          améliorer la sécurité, la qualité de l’expérience et la préparation du
+          lancement officiel.
+        </p>
+        <div className="maintenance-actions">
+          <a
+            href={CONTACT_MAILTO}
+            className="btn btn-primary"
+            onClick={(event) => openMailClient(event)}
+          >
+            Nous contacter
+          </a>
+        </div>
+        <p className="maintenance-meta">Merci pour votre patience.</p>
+      </div>
+    </div>
+  );
+}
 
 function openMailClient(event) {
   if (event) {
@@ -1079,6 +1111,10 @@ function ScrollToTop() {
 }
 
 function App() {
+  if (MAINTENANCE_MODE) {
+    return <MaintenancePage />;
+  }
+
   return (
     <>
       <ScrollToTop />
